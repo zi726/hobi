@@ -1,0 +1,3544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a14">
+    <title>حبيبي — ألعاب الأزواج | Habibi — Couples Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js">
+    </script>
+    <style>
+        :root {
+            --rose: #F43F85;
+            --rose2: #FF6FA3;
+            --rose3: #FFB3CC;
+            --gold: #F5C842;
+            --teal: #2EC4B6;
+            --lavender: #A78BFA;
+            --sky: #60A5FA;
+            --bg: #07070F;
+            --bg2: #0E0E1C;
+            --bg3: #141428;
+            --card: #111122;
+            --card2: #181830;
+            --text: #F0EBF8;
+            --text2: #9993B8;
+            --border: rgba(244, 63, 133, 0.15);
+            --border2: rgba(244, 63, 133, 0.08);
+            --glow: 0 0 40px rgba(244, 63, 133, 0.2);
+            --radius: 20px;
+            --transition: 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: direction 0.3s;
+        }
+        body.ltr {
+            direction: ltr;
+            font-family: 'Inter', 'Tajawal', sans-serif;
+        }
+        body.ltr .site-header,
+        body.ltr .nav-tabs,
+        body.ltr .wrapper {
+            direction: ltr;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 40% at 20% 10%, rgba(244, 63, 133, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 30% at 80% 90%, rgba(167, 139, 250, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 50% at 60% 40%, rgba(46, 196, 182, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            animation: twinkle var(--dur, 3s) infinite var(--delay, 0s);
+        }
+        @keyframes twinkle {
+            0%,
+            100% {
+                opacity: var(--min-op, 0.1);
+                transform: scale(1);
+            }
+            50% {
+                opacity: var(--max-op, 0.6);
+                transform: scale(1.3);
+            }
+        }
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 7, 15, 0.88);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--rose), #C0215A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 20px rgba(244, 63, 133, 0.4);
+            flex-shrink: 0;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--rose2), var(--rose), #c01858);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo-sub {
+            font-size: 11px;
+            color: var(--text2);
+            font-weight: 400;
+            margin-top: 1px;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .lang-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text2);
+            transition: all 0.2s;
+            font-family: 'Tajawal', sans-serif;
+            letter-spacing: 0;
+        }
+        .lang-btn:hover {
+            background: rgba(244, 63, 133, 0.12);
+            border-color: var(--rose);
+            color: var(--rose2);
+        }
+        .online-pill {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            background: rgba(46, 196, 182, 0.1);
+            border: 1px solid rgba(46, 196, 182, 0.3);
+            border-radius: 50px;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: var(--teal);
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .online-pill.show {
+            display: flex;
+        }
+        .online-pill .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--teal);
+            animation: pulse-dot 1.5s infinite;
+        }
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.7);
+            }
+        }
+        .sound-btn,
+        .music-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .sound-btn:hover,
+        .music-btn:hover {
+            background: rgba(244, 63, 133, 0.12);
+            border-color: var(--rose);
+        }
+        .music-btn.active {
+            background: rgba(244, 63, 133, 0.18);
+            border-color: var(--rose);
+            box-shadow: 0 0 12px rgba(244, 63, 133, 0.3);
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 12px 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text2);
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .tab-btn:hover {
+            background: rgba(244, 63, 133, 0.08);
+            border-color: var(--border);
+            color: var(--text);
+        }
+        .tab-btn.active {
+            background: rgba(244, 63, 133, 0.12);
+            border-color: rgba(244, 63, 133, 0.35);
+            color: var(--rose2);
+            box-shadow: 0 0 20px rgba(244, 63, 133, 0.15);
+        }
+        .tab-icon {
+            font-size: 17px;
+        }
+        .main {
+            padding: 24px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+            animation: secIn 0.3s ease;
+        }
+        @keyframes secIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        @media(max-width:900px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .three-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media(max-width:600px) {
+            .three-col {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            border-color: var(--border);
+            box-shadow: var(--glow);
+        }
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        .card-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: rgba(244, 63, 133, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 24px 36px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(244, 63, 133, 0.08);
+            border: 1px solid rgba(244, 63, 133, 0.2);
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-size: 12px;
+            color: var(--rose2);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 68px);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--rose2), var(--rose), #9B1D4B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 15px;
+            color: var(--text2);
+            max-width: 520px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 36px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat-num {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--rose2);
+        }
+        .hero-stat-label {
+            font-size: 11px;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+        .start-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--rose), #B01050);
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(244, 63, 133, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(244, 63, 133, 0.5);
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+            margin-top: 16px;
+        }
+        .game-tile {
+            background: var(--card);
+            border: 1px solid var(--border2);
+            border-radius: var(--radius);
+            padding: 26px 22px;
+            cursor: pointer;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-tile::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            background: linear-gradient(135deg, rgba(244, 63, 133, 0.08), transparent);
+            transition: opacity 0.3s;
+        }
+        .game-tile:hover::before {
+            opacity: 1;
+        }
+        .game-tile:hover {
+            border-color: rgba(244, 63, 133, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+        }
+        .game-tile-icon {
+            font-size: 38px;
+            margin-bottom: 14px;
+        }
+        .game-tile-title {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .game-tile-desc {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+        .game-tile-count {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(244, 63, 133, 0.15);
+            border: 1px solid rgba(244, 63, 133, 0.25);
+            border-radius: 50px;
+            padding: 3px 10px;
+            font-size: 11px;
+            color: var(--rose2);
+            font-weight: 700;
+        }
+        .scratch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 14px;
+        }
+        .scratch-tile {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .scratch-tile:hover {
+            transform: scale(1.03);
+        }
+        .scratch-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+        }
+        .scratch-emoji {
+            font-size: 34px;
+        }
+        .scratch-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--rose2);
+            text-align: center;
+            line-height: 1.4;
+        }
+        .scratch-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            touch-action: none;
+            cursor: crosshair;
+        }
+        .scratch-detail {
+            background: linear-gradient(135deg, rgba(20, 8, 35, 0.95), rgba(14, 14, 28, 0.95));
+            border: 1.5px solid rgba(244, 63, 133, 0.3);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-top: 12px;
+            font-size: 15px;
+            line-height: 1.9;
+            color: var(--text);
+            min-height: 80px;
+            box-shadow: 0 0 30px rgba(244, 63, 133, 0.15);
+        }
+        .scratch-detail strong {
+            color: var(--rose2);
+        }
+        .wheel-layout {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+        @media(max-width:700px) {
+            .wheel-layout {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+        }
+        #wheelCanvas {
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(244, 63, 133, 0.25), 0 0 120px rgba(244, 63, 133, 0.1);
+            display: block;
+            max-width: 100%;
+            height: auto;
+            transition: filter 0.3s;
+        }
+        #wheelCanvas.spinning {
+            filter: drop-shadow(0 0 20px var(--rose));
+        }
+        .wheel-side {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .wheel-result-box {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .wheel-result-label {
+            font-size: 11px;
+            color: var(--text2);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .wheel-result-val {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--rose2);
+            min-height: 30px;
+            line-height: 1.4;
+        }
+        .spin-btn {
+            background: linear-gradient(135deg, var(--rose), #B01050);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(244, 63, 133, 0.4);
+            transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+            width: 100%;
+        }
+        .spin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(244, 63, 133, 0.55);
+        }
+        .spin-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .wheel-history {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+        }
+        .wheel-history h4 {
+            font-size: 13px;
+            color: var(--text2);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+        .history-list::-webkit-scrollbar {
+            display: none;
+        }
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .history-num {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(244, 63, 133, 0.15);
+            color: var(--rose2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .dice-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media(max-width:700px) {
+            .dice-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        .dice-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .dice-row {
+            display: flex;
+            gap: 20px;
+        }
+        .die-canvas {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            cursor: pointer;
+            box-shadow: var(--glow);
+            transition: transform 0.1s, filter 0.2s;
+        }
+        .die-canvas:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        .die-canvas:active {
+            transform: scale(0.94);
+        }
+        @keyframes diceRoll {
+            0% {
+                transform: rotate(0) scale(1);
+            }
+            25% {
+                transform: rotate(-18deg) scale(1.1);
+            }
+            50% {
+                transform: rotate(16deg) scale(0.92);
+            }
+            75% {
+                transform: rotate(-10deg) scale(1.04);
+            }
+            100% {
+                transform: rotate(0) scale(1);
+            }
+        }
+        .die-canvas.rolling {
+            animation: diceRoll 0.5s ease;
+        }
+        .roll-btn {
+            background: linear-gradient(135deg, var(--rose), #B01050);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(244, 63, 133, 0.35);
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+        .roll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(244, 63, 133, 0.5);
+        }
+        .dice-result-card {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .dice-result-text {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: rgba(244, 63, 133, 0.04);
+            border-radius: 12px;
+            border: 1px solid var(--border2);
+        }
+        .dice-category-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(244, 63, 133, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 5px 14px;
+            font-size: 12px;
+            color: var(--rose2);
+            font-weight: 700;
+        }
+        .tod-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+        }
+        @media(max-width:800px) {
+            .tod-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        .tod-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .intensity-die-wrap {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .tod-die-canvas {
+            width: 90px;
+            height: 90px;
+            border-radius: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(244, 63, 133, 0.2);
+            transition: transform 0.1s;
+        }
+        .tod-die-canvas:hover {
+            transform: scale(1.08);
+        }
+        .tod-die-canvas.rolling {
+            animation: diceRoll 0.5s ease;
+        }
+        .intensity-display {
+            text-align: center;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            width: 100%;
+        }
+        .intensity-title {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+        .intensity-desc {
+            font-size: 12px;
+            color: var(--text2);
+            line-height: 1.5;
+        }
+        .tod-type-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .tod-type-btn {
+            padding: 14px;
+            border-radius: 14px;
+            border: 1.5px solid;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: center;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.15s;
+        }
+        .tod-type-btn:hover {
+            transform: scale(1.03);
+        }
+        .tod-type-btn.truth {
+            background: rgba(96, 165, 250, 0.07);
+            border-color: rgba(96, 165, 250, 0.3);
+            color: var(--sky);
+        }
+        .tod-type-btn.dare {
+            background: rgba(244, 63, 133, 0.07);
+            border-color: rgba(244, 63, 133, 0.3);
+            color: var(--rose2);
+        }
+        .tod-main {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .tod-q-card {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+        .tod-q-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 50px;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .tod-q-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.8;
+            max-width: 500px;
+        }
+        .next-btn {
+            background: rgba(244, 63, 133, 0.08);
+            border: 1px solid var(--border);
+            color: var(--rose2);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .next-btn:hover {
+            background: rgba(244, 63, 133, 0.15);
+            box-shadow: 0 0 20px rgba(244, 63, 133, 0.2);
+        }
+        .tod-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .tod-stat {
+            background: var(--card2);
+            border: 1px solid var(--border2);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
+        .tod-stat-num {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--rose2);
+        }
+        .tod-stat-label {
+            font-size: 11px;
+            color: var(--text2);
+            margin-top: 3px;
+        }
+        .online-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media(max-width:800px) {
+            .online-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        .status-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border2);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: var(--text2);
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: background 0.3s;
+        }
+        .status-dot.idle {
+            background: #333;
+        }
+        .status-dot.connecting {
+            background: var(--gold);
+            animation: blink .8s infinite;
+        }
+        .status-dot.waiting {
+            background: var(--sky);
+            animation: blink .8s infinite;
+        }
+        .status-dot.connected {
+            background: var(--teal);
+        }
+        .status-dot.error {
+            background: #FF5555;
+        }
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+        }
+        .online-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .o-btn {
+            padding: 20px 14px;
+            border-radius: 16px;
+            border: none;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+        .o-btn-icon {
+            font-size: 26px;
+        }
+        .o-btn.create {
+            background: linear-gradient(135deg, var(--rose), #B01050);
+            color: white;
+            box-shadow: 0 4px 20px rgba(244, 63, 133, 0.3);
+        }
+        .o-btn.create:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(244, 63, 133, 0.45);
+        }
+        .o-btn.join {
+            background: rgba(96, 165, 250, 0.08);
+            border: 1.5px solid rgba(96, 165, 250, 0.25);
+            color: var(--sky);
+        }
+        .o-btn.join:hover {
+            background: rgba(96, 165, 250, 0.14);
+        }
+        .join-form {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .join-form.show {
+            display: flex;
+            animation: secIn 0.2s ease;
+        }
+        .join-input {
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1.5px solid rgba(96, 165, 250, 0.4);
+            background: rgba(96, 165, 250, 0.06);
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 22px;
+            text-align: center;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            outline: none;
+            transition: box-shadow 0.2s;
+        }
+        .join-input:focus {
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+        .join-go-btn {
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, var(--sky), #3B82F6);
+            color: white;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .room-box {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: rgba(244, 63, 133, 0.04);
+            border: 1.5px solid rgba(244, 63, 133, 0.2);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .room-box.show {
+            display: flex;
+            animation: secIn 0.25s ease;
+        }
+        .room-box-label {
+            font-size: 11px;
+            color: var(--text2);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .room-id {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            background: linear-gradient(135deg, var(--rose2), var(--rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .room-hint {
+            font-size: 12px;
+            color: var(--text2);
+            text-align: center;
+        }
+        .copy-btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            background: rgba(244, 63, 133, 0.1);
+            color: var(--rose2);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover {
+            background: rgba(244, 63, 133, 0.2);
+        }
+        .partner-box {
+            display: none;
+            align-items: center;
+            gap: 16px;
+            background: rgba(46, 196, 182, 0.05);
+            border: 1px solid rgba(46, 196, 182, 0.2);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .partner-box.show {
+            display: flex;
+            animation: secIn 0.25s ease;
+        }
+        .partner-avatar {
+            font-size: 36px;
+        }
+        .partner-info {
+            flex: 1;
+        }
+        .partner-name {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--teal);
+        }
+        .partner-sub {
+            font-size: 12px;
+            color: var(--text2);
+            margin-top: 2px;
+        }
+        .disco-btn {
+            background: rgba(255, 80, 80, 0.1);
+            border: 1px solid rgba(255, 80, 80, 0.25);
+            color: #FF8888;
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .disco-btn:hover {
+            background: rgba(255, 80, 80, 0.2);
+        }
+        .chat-wrap {
+            display: none;
+        }
+        .chat-wrap.show {
+            display: block;
+            animation: secIn 0.25s ease;
+        }
+        .chat-messages {
+            height: 220px;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            scrollbar-width: none;
+        }
+        .chat-messages::-webkit-scrollbar {
+            display: none;
+        }
+        .chat-empty {
+            color: var(--text2);
+            font-size: 13px;
+            text-align: center;
+            margin: auto;
+        }
+        .chat-msg {
+            display: flex;
+            max-width: 80%;
+        }
+        .chat-msg.me {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .chat-msg.partner {
+            align-self: flex-start;
+        }
+        .bubble {
+            background: rgba(244, 63, 133, 0.12);
+            border: 1px solid rgba(244, 63, 133, 0.2);
+            border-radius: 14px;
+            padding: 9px 14px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .chat-msg.partner .bubble {
+            background: rgba(96, 165, 250, 0.1);
+            border-color: rgba(96, 165, 250, 0.2);
+        }
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 11px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(244, 63, 133, 0.04);
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+        .chat-input:focus {
+            border-color: var(--rose);
+        }
+        .chat-send {
+            background: linear-gradient(135deg, var(--rose), #B01050);
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .online-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border2);
+            border-radius: 14px;
+            padding: 16px;
+        }
+        .feature-icon {
+            font-size: 28px;
+        }
+        .feature-text h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .feature-text p {
+            font-size: 12px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+        .toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(14, 14, 28, 0.97);
+            border: 1px solid var(--rose);
+            border-radius: 50px;
+            padding: 10px 22px;
+            font-size: 13px;
+            color: var(--rose2);
+            z-index: 9999;
+            backdrop-filter: blur(16px);
+            white-space: nowrap;
+            pointer-events: none;
+            animation: toastIn 0.3s ease;
+            box-shadow: 0 4px 24px rgba(244, 63, 133, 0.3);
+            max-width: 90vw;
+            text-align: center;
+        }
+        .toast.out {
+            animation: toastOut 0.3s ease forwards;
+        }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+        .float-chat {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rose), #B01050);
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 24px rgba(244, 63, 133, 0.5);
+            z-index: 200;
+            transition: transform 0.15s;
+        }
+        .float-chat.show {
+            display: flex;
+        }
+        .float-chat:hover {
+            transform: scale(1.1);
+        }
+        .notif-dot {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #FF4444;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: white;
+            font-weight: 700;
+            border: 2px solid var(--bg);
+        }
+        .notif-dot.show {
+            display: flex;
+        }
+        .site-footer {
+            border-top: 1px solid var(--border2);
+            padding: 20px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text2);
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ── Monetization: Smart CTA Banner ── */
+        .monetag-cta-wrap {
+            position: relative;
+            z-index: 2;
+            max-width: 1300px;
+            margin: 0 auto 28px;
+            padding: 0 24px;
+            display: none;
+        }
+        .monetag-cta-wrap.show {
+            display: block;
+            animation: secIn 0.4s ease;
+        }
+        .monetag-cta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: linear-gradient(135deg, rgba(245, 200, 66, 0.09), rgba(244, 63, 133, 0.06));
+            border: 1.5px solid rgba(245, 200, 66, 0.35);
+            border-radius: 18px;
+            padding: 16px 22px;
+            cursor: pointer;
+            transition: all 0.28s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(245, 200, 66, 0.08);
+        }
+        .monetag-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(245, 200, 66, 0.06), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .monetag-cta:hover::before {
+            opacity: 1;
+        }
+        .monetag-cta:hover {
+            border-color: rgba(245, 200, 66, 0.65);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(245, 200, 66, 0.18), 0 0 50px rgba(244, 63, 133, 0.08);
+        }
+        .monetag-cta:active {
+            transform: scale(0.97);
+        }
+        .monetag-cta-gift {
+            font-size: 42px;
+            flex-shrink: 0;
+            animation: giftBounce 2.2s infinite;
+            filter: drop-shadow(0 0 12px rgba(245, 200, 66, 0.5));
+        }
+        @keyframes giftBounce {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            15% {
+                transform: translateY(-14px) scale(1.1);
+            }
+            30% {
+                transform: translateY(0) scale(0.96);
+            }
+            45% {
+                transform: translateY(-7px) scale(1.04);
+            }
+            60% {
+                transform: translateY(0) scale(1);
+            }
+        }
+        .monetag-cta-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .monetag-cta-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 3px;
+            letter-spacing: 0.4px;
+        }
+        .monetag-cta-sub {
+            font-size: 12px;
+            color: var(--text2);
+            line-height: 1.5;
+        }
+        .monetag-cta-arrow {
+            font-size: 22px;
+            flex-shrink: 0;
+            color: var(--gold);
+            opacity: 0.8;
+            transition: transform 0.3s;
+        }
+        .monetag-cta:hover .monetag-cta-arrow {
+            transform: translateX(4px);
+            opacity: 1;
+        }
+        .monetag-cta-sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            pointer-events: none;
+            animation: sparkFloat 2s infinite;
+            opacity: 0;
+        }
+        .monetag-cta-sparkle:nth-child(1) {
+            top: 20%;
+            left: 12%;
+        }
+        .monetag-cta-sparkle:nth-child(2) {
+            top: 55%;
+            left: 8%;
+            animation-delay: 0.7s;
+        }
+        .monetag-cta-sparkle:nth-child(3) {
+            top: 30%;
+            right: 18%;
+            animation-delay: 1.4s;
+        }
+        @keyframes sparkFloat {
+            0%,
+            100% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateY(-16px) scale(1.3);
+            }
+        }
+
+        /* ── Mobile Floating Monetization Pill ── */
+        .monetag-float-pill {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 195;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #1a1028, #1a0f20);
+            border: 1.5px solid rgba(245, 200, 66, 0.4);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 6px 30px rgba(245, 200, 66, 0.18), 0 0 40px rgba(244, 63, 133, 0.1);
+            animation: floatPillIn 0.5s ease, floatUpDown 3s ease-in-out infinite;
+            white-space: nowrap;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .monetag-float-pill.show {
+            display: flex;
+        }
+        @keyframes floatPillIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        @keyframes floatUpDown {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-8px);
+            }
+        }
+        .monetag-float-pill:active {
+            transform: translateX(-50%) scale(0.94);
+        }
+        .monetag-float-pill-emoji {
+            font-size: 22px;
+            animation: giftBounce 1.8s infinite;
+        }
+        .monetag-float-pill-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.3px;
+        }
+        .monetag-float-pill-close {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: var(--text2);
+            cursor: pointer;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 2px;
+        }
+        .monetag-float-pill-close:hover {
+            background: rgba(255, 80, 80, 0.2);
+            color: #FF8888;
+        }
+
+        @media(max-width:480px) {
+            .monetag-float-pill {
+                bottom: 80px;
+                padding: 9px 16px;
+            }
+            .monetag-cta {
+                padding: 14px 16px;
+                gap: 10px;
+            }
+            .monetag-cta-gift {
+                font-size: 32px;
+            }
+            .monetag-cta-title {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars" id="starsEl"></div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo-area" id="logoArea" title="العودة للرئيسية">
+                <div class="logo-icon">💑</div>
+                <div>
+                    <div class="logo-text">حبيبي</div>
+                    <div class="logo-sub" data-i18n="logoSub">ألعاب الأزواج</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="music-btn" id="musicToggle" title="موسيقى هادئة">🎵</button>
+                <button class="sound-btn" id="soundToggle" title="المؤثرات الصوتية">🔊</button>
+                <button class="lang-btn" id="langToggle" title="تغيير اللغة">EN</button>
+                <div class="online-pill" id="headerBadge">
+                    <div class="dot"></div>
+                    <span data-i18n="connectedBadge">متصل</span>
+                </div>
+            </div>
+        </div>
+        <div class="nav-tabs" id="navTabs">
+            <div class="tab-btn active" data-tab="home"><span class="tab-icon">🏠</span> <span data-i18n="navHome">الرئيسية</span></div>
+            <div class="tab-btn" data-tab="scratch"><span class="tab-icon">🎴</span> <span data-i18n="navScratch">بطاقات مفاجأة</span></div>
+            <div class="tab-btn" data-tab="wheel"><span class="tab-icon">🎡</span> <span data-i18n="navWheel">عجلة التحديات</span></div>
+            <div class="tab-btn" data-tab="dice"><span class="tab-icon">🎲</span> <span data-i18n="navDice">نرد المهام</span></div>
+            <div class="tab-btn" data-tab="tod"><span class="tab-icon">🔥</span> <span data-i18n="navTod">صراحة وجرأة</span></div>
+            <div class="tab-btn" data-tab="online"><span class="tab-icon">🌐</span> <span data-i18n="navOnline">اللعب معاً</span></div>
+        </div>
+    </header>
+
+    <!-- ── Monetization: Smart CTA Banner (appears after first interaction) ── -->
+    <div class="monetag-cta-wrap" id="monetagCtaWrap">
+        <div class="monetag-cta" id="monetagCta" title="اكتشف المزيد من المتعة!">
+            <span class="monetag-cta-sparkle"></span>
+            <span class="monetag-cta-sparkle"></span>
+            <span class="monetag-cta-sparkle"></span>
+            <span class="monetag-cta-gift">🎁</span>
+            <div class="monetag-cta-body">
+                <div class="monetag-cta-title" data-i18n-mon="ctaTitle">🎉 مفاجأة حصرية للأزواج!</div>
+                <div class="monetag-cta-sub" data-i18n-mon="ctaSub">اكتشف المزيد من المتعة واضغط هنا لمفاجأتك الخاصة 💛</div>
+            </div>
+            <span class="monetag-cta-arrow">→</span>
+        </div>
+    </div>
+
+    <!-- ── Mobile Floating Monetization Pill ── -->
+    <div class="monetag-float-pill" id="monetagFloatPill" title="مفاجأة خاصة!">
+        <span class="monetag-float-pill-emoji">🎁</span>
+        <span class="monetag-float-pill-text" data-i18n-mon="floatPill">مفاجأتك بانتظارك!</span>
+        <button class="monetag-float-pill-close" id="monetagFloatClose" title="إغلاق">✕</button>
+    </div>
+
+    <main>
+        <section class="section active" id="sec-home">
+            <div class="hero">
+                <div class="hero-badge" data-i18n="heroBadge">✨ ألعاب مميزة للأزواج ✨</div>
+                <h1 data-i18n="heroTitle">تجارب لا تُنسى<br><span>مع من تحب</span></h1>
+                <p data-i18n="heroDesc">مجموعة من الألعاب الممتعة والمميزة لتقوية الرابطة بينكما واكتشاف أوقات جديدة من الفرح</p>
+                <button class="start-btn" id="heroStartBtn">
+                    <span data-i18n="startBtn">ابدأ اللعب الآن</span> 💫
+                </button>
+                <div class="hero-stats">
+                    <div class="hero-stat"><div class="hero-stat-num">+250</div><div class="hero-stat-label" data-i18n="statTasks">مهمة ونشاط</div></div>
+                    <div class="hero-stat"><div class="hero-stat-num">+400</div><div class="hero-stat-label" data-i18n="statQuestions">سؤال متنوع</div></div>
+                    <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label" data-i18n="statGames">ألعاب مختلفة</div></div>
+                    <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label" data-i18n="statFree">مجاني دائماً</div></div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <div class="games-grid" id="homeGamesGrid"></div>
+                <div style="height:40px"></div>
+            </div>
+        </section>
+
+        <section class="section" id="sec-scratch">
+            <div class="wrapper">
+                <div style="margin-bottom:20px">
+                    <h2 style="font-size:24px;font-weight:800;margin-bottom:6px" data-i18n="scratchTitle">بطاقات المفاجآت 🎴</h2>
+                    <p style="color:var(--text2);font-size:14px" data-i18n="scratchDesc">احكوا البطاقة معاً لاكتشاف نشاط أو تحدي ممتع</p>
+                </div>
+                <div class="scratch-grid" id="scratchGrid"></div>
+                <div class="scratch-detail" id="scratchDetail"></div>
+                <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+                    <button class="next-btn" id="resetScratchBtn"><span data-i18n="newCards">↺ بطاقات جديدة</span></button>
+                    <button class="next-btn" id="revealAllBtn"><span data-i18n="revealAll">👁️ كشف الكل</span></button>
+                </div>
+                <div style="height:40px"></div>
+            </div>
+        </section>
+
+        <section class="section" id="sec-wheel">
+            <div class="wrapper">
+                <div style="margin-bottom:20px">
+                    <h2 style="font-size:24px;font-weight:800;margin-bottom:6px" data-i18n="wheelTitle">عجلة التحديات 🎡</h2>
+                    <p style="color:var(--text2);font-size:14px" data-i18n="wheelDesc">أدوروا العجلة واكتشفوا التحدي الذي ينتظركما</p>
+                </div>
+                <div class="wheel-layout">
+                    <canvas id="wheelCanvas" width="320" height="320"></canvas>
+                    <div class="wheel-side">
+                        <div class="wheel-result-box">
+                            <div class="wheel-result-label" data-i18n="wheelResultLabel">النتيجة الحالية</div>
+                            <div class="wheel-result-val" id="wheelResult" data-i18n="wheelDefault">أدوروا العجلة 🎡</div>
+                        </div>
+                        <button class="spin-btn" id="spinBtn"><span data-i18n="spinNow">🎯 أدر العجلة الآن!</span></button>
+                        <div class="wheel-history">
+                            <h4 data-i18n="wheelHistoryTitle">السجل الأخير</h4>
+                            <div class="history-list" id="wheelHistory"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:40px"></div>
+            </div>
+        </section>
+
+        <section class="section" id="sec-dice">
+            <div class="wrapper">
+                <div style="margin-bottom:20px">
+                    <h2 style="font-size:24px;font-weight:800;margin-bottom:6px" data-i18n="diceTitle">نرد المهام 🎲</h2>
+                    <p style="color:var(--text2);font-size:14px" data-i18n="diceDesc">أكثر من 250 مهمة ممتعة ومتنوعة</p>
+                </div>
+                <div class="dice-layout">
+                    <div class="dice-display">
+                        <div class="dice-row">
+                            <canvas class="die-canvas" id="die1" width="100" height="100"></canvas>
+                            <canvas class="die-canvas" id="die2" width="100" height="100"></canvas>
+                        </div>
+                        <button class="roll-btn" id="rollBtn"><span data-i18n="rollDice">🎲 ارمِ النرد!</span></button>
+                        <div style="font-size:13px;color:var(--text2);text-align:center" data-i18n="diceHint">أو اضغط على النرد مباشرة</div>
+                    </div>
+                    <div class="dice-result-card">
+                        <div class="card-title"><div class="card-icon">✨</div> <span data-i18n="currentTask">المهمة الحالية</span></div>
+                        <div class="dice-result-text" id="diceResult" data-i18n="diceDefault">ارمِ النرد لتظهر مهمة ممتعة!</div>
+                        <div id="diceCategoryArea"></div>
+                    </div>
+                </div>
+                <div style="height:40px"></div>
+            </div>
+        </section>
+
+        <section class="section" id="sec-tod">
+            <div class="wrapper">
+                <div style="margin-bottom:20px">
+                    <h2 style="font-size:24px;font-weight:800;margin-bottom:6px" data-i18n="todTitle">صراحة وجرأة 🔥</h2>
+                    <p style="color:var(--text2);font-size:14px" data-i18n="todDesc">أكثر من 400 سؤال وتحدي على 4 درجات من الشدة</p>
+                </div>
+                <div class="tod-layout">
+                    <div class="tod-controls">
+                        <div class="intensity-die-wrap">
+                            <canvas class="tod-die-canvas" id="todDie" width="90" height="90"></canvas>
+                            <div class="intensity-display">
+                                <div class="intensity-title" id="intTitle" style="color:var(--text2)" data-i18n="rollDiePrompt">ارمِ النرد</div>
+                                <div class="intensity-desc" id="intDesc" data-i18n="rollDieDesc">لتحديد درجة شدة السؤال</div>
+                            </div>
+                        </div>
+                        <div class="tod-type-btns">
+                            <button class="tod-type-btn truth" id="truthBtn"><span data-i18n="truthBtn">💬 صراحة</span></button>
+                            <button class="tod-type-btn dare" id="dareBtn"><span data-i18n="dareBtn">🔥 جرأة</span></button>
+                        </div>
+                        <div class="tod-stats">
+                            <div class="tod-stat"><div class="tod-stat-num" id="statTotal">0</div><div class="tod-stat-label" data-i18n="statRounds">الجولات</div></div>
+                            <div class="tod-stat"><div class="tod-stat-num" id="statTruths">0</div><div class="tod-stat-label" data-i18n="statTruthsLabel">صراحة</div></div>
+                            <div class="tod-stat"><div class="tod-stat-num" id="statDares">0</div><div class="tod-stat-label" data-i18n="statDaresLabel">جرأة</div></div>
+                        </div>
+                    </div>
+                    <div class="tod-main">
+                        <div class="tod-q-card" id="todQCard">
+                            <div style="font-size:48px">🔥</div>
+                            <div class="tod-q-text" style="color:var(--text2)" data-i18n="todPlaceholder">ارمِ النرد أو اضغط على صراحة / جرأة لتبدأ</div>
+                        </div>
+                        <div id="nextBtnArea" style="display:none">
+                            <button class="next-btn" id="nextTodBtn"><span data-i18n="nextQuestion">السؤال التالي ←</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:40px"></div>
+            </div>
+        </section>
+
+        <section class="section" id="sec-online">
+            <div class="wrapper">
+                <div style="margin-bottom:20px">
+                    <h2 style="font-size:24px;font-weight:800;margin-bottom:6px" data-i18n="onlineTitle">اللعب معاً أونلاين 🌐</h2>
+                    <p style="color:var(--text2);font-size:14px" data-i18n="onlineDesc">العبا معاً من أي مكان بالعالم في الوقت الحقيقي</p>
+                </div>
+                <div class="online-layout">
+                    <div>
+                        <div class="status-bar"><div class="status-dot idle" id="oDot"></div><span id="oStatus" data-i18n="statusIdle">غير متصل — أنشئ غرفة أو انضم لواحدة</span></div>
+                        <div class="online-btns">
+                            <button class="o-btn create" id="createBtn"><span class="o-btn-icon">➕</span><span data-i18n="createRoom">إنشاء غرفة</span></button>
+                            <button class="o-btn join" id="showJoinBtn"><span class="o-btn-icon">🔗</span><span data-i18n="joinRoom">انضمام</span></button>
+                        </div>
+                        <div class="join-form" id="joinForm">
+                            <input type="text" class="join-input" id="joinInput" placeholder="رمز الغرفة" maxlength="6" autocomplete="off">
+                            <button class="join-go-btn" id="joinGoBtn"><span data-i18n="joinGo">🔗 انضمام للغرفة</span></button>
+                        </div>
+                        <div class="room-box" id="roomBox">
+                            <div class="room-box-label" data-i18n="roomCodeLabel">رمز غرفتك</div>
+                            <div class="room-id" id="roomId">------</div>
+                            <div class="room-hint" data-i18n="roomHint">شارك هذا الرمز مع شريكك ليتصل بك</div>
+                            <button class="copy-btn" id="copyBtn"><span data-i18n="copyCode">📋 نسخ الرمز</span></button>
+                        </div>
+                        <div class="partner-box" id="partnerBox">
+                            <div class="partner-avatar">💑</div>
+                            <div class="partner-info"><div class="partner-name" data-i18n="partnerConnected">✅ شريكك متصل الآن!</div><div class="partner-sub" data-i18n="partnerSub">النتائج تُشارك تلقائياً</div></div>
+                            <button class="disco-btn" id="discoBtn">✕</button>
+                        </div>
+                        <div class="card chat-wrap" id="chatWrap">
+                            <div class="card-title"><div class="card-icon">💬</div><span data-i18n="chatTitle">الدردشة</span></div>
+                            <div class="chat-messages" id="chatMsgs"><div class="chat-empty" id="chatEmpty" data-i18n="chatEmpty">لا رسائل بعد... ابدأ! 💬</div></div>
+                            <div class="chat-input-row">
+                                <button class="chat-send" id="chatSend"><span data-i18n="sendMsg">↑ إرسال</span></button>
+                                <input type="text" class="chat-input" id="chatInput" placeholder="اكتب رسالة..." maxlength="200">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="online-features" id="onlineFeatures"></div>
+                </div>
+                <div style="height:40px"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" data-i18n="footer">صُنع بـ ❤️ — حبيبي، ألعاب الأزواج 2025</footer>
+
+    <button class="float-chat" id="floatChat">💬<div class="notif-dot" id="notifDot"></div></button>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ═══════════════════════════════════
+            //  MONETIZATION CONFIG
+            // ═══════════════════════════════════
+            const MONETAG_LINK = 'https://omg10.com/4/10943092';
+            let popunderFired = false;
+            let monetagCtaVisible = false;
+
+            // ── Smart Popunder (fires on first meaningful click after 3s on page) ──
+            function firePopunder() {
+                if (popunderFired) return;
+                popunderFired = true;
+                try {
+                    const w = window.open(MONETAG_LINK, '_blank', 'noopener,noreferrer');
+                    if (w) {
+                        // Try to refocus the main window (some browsers block this)
+                        setTimeout(() => { try { w.blur();
+                                window.focus(); } catch (e) {} }, 200);
+                    }
+                } catch (e) {
+                    // Fallback: redirect in same tab (less ideal, use sparingly)
+                }
+            }
+
+            // ── Show Monetization CTA Banner ──
+            function showMonetagCta() {
+                if (monetagCtaVisible) return;
+                monetagCtaVisible = true;
+                const wrap = document.getElementById('monetagCtaWrap');
+                const floatPill = document.getElementById('monetagFloatPill');
+                if (wrap) wrap.classList.add('show');
+                // Show floating pill on mobile
+                if (window.innerWidth < 768 && floatPill) {
+                    floatPill.classList.add('show');
+                }
+            }
+
+            // ── CTA Click Handler ──
+            function onMonetagCtaClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                firePopunder();
+                // Also try direct navigation as fallback
+                setTimeout(() => {
+                    try { window.open(MONETAG_LINK, '_blank', 'noopener'); } catch (er) {}
+                }, 100);
+            }
+
+            // ── Schedule popunder & CTA ──
+            let firstInteractionDone = false;
+            const popunderScheduleMs = 4000; // Show CTA after 4s, fire popunder on next click
+            let scheduleTimer = null;
+
+            function scheduleMonetization() {
+                if (scheduleTimer) return;
+                scheduleTimer = setTimeout(() => {
+                    showMonetagCta();
+                    // After showing CTA, next click anywhere fires popunder
+                    if (!popunderFired) {
+                        document.addEventListener('click', function fireOnce() {
+                            firePopunder();
+                            document.removeEventListener('click', fireOnce);
+                        }, { once: true });
+                    }
+                }, popunderScheduleMs);
+            }
+
+            // Start scheduling on first user interaction
+            function onFirstInteraction() {
+                if (firstInteractionDone) return;
+                firstInteractionDone = true;
+                scheduleMonetization();
+                // Remove listener after first fire
+                ['click', 'touchstart', 'scroll'].forEach(ev => {
+                    document.removeEventListener(ev, onFirstInteraction);
+                });
+            }
+            ['click', 'touchstart', 'scroll'].forEach(ev => {
+                document.addEventListener(ev, onFirstInteraction, { once: false, passive: true });
+            });
+
+            // ── Monetag CTA elements ──
+            const monetagCta = document.getElementById('monetagCta');
+            const monetagFloatPill = document.getElementById('monetagFloatPill');
+            const monetagFloatClose = document.getElementById('monetagFloatClose');
+
+            if (monetagCta) {
+                monetagCta.addEventListener('click', onMonetagCtaClick);
+            }
+            if (monetagFloatPill) {
+                monetagFloatPill.addEventListener('click', (e) => {
+                    if (e.target === monetagFloatClose) return;
+                    onMonetagCtaClick(e);
+                });
+            }
+            if (monetagFloatClose) {
+                monetagFloatClose.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    monetagFloatPill.classList.remove('show');
+                    // Hide for session
+                    try { sessionStorage.setItem('monetag_pill_closed', '1'); } catch (er) {}
+                });
+            }
+            // Don't show floating pill if user already closed it this session
+            try {
+                if (sessionStorage.getItem('monetag_pill_closed') === '1' && monetagFloatPill) {
+                    monetagFloatPill.style.display = 'none';
+                }
+            } catch (er) {}
+
+            // ── Update monetization i18n elements ──
+            function updateMonetagI18n() {
+                const isAr = currentLang === 'ar';
+                document.querySelectorAll('[data-i18n-mon]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-mon');
+                    const map = {
+                        ctaTitle: isAr ? '🎉 مفاجأة حصرية للأزواج!' : '🎉 Exclusive Couples Surprise!',
+                        ctaSub: isAr ? 'اكتشف المزيد من المتعة واضغط هنا لمفاجأتك الخاصة 💛' :
+                        'Discover more fun — tap here for your special surprise 💛',
+                        floatPill: isAr ? 'مفاجأتك بانتظارك!' : 'Your surprise awaits!',
+                    };
+                    if (map[key]) el.textContent = map[key];
+                });
+                if (monetagFloatClose) monetagFloatClose.title = isAr ? 'إغلاق' : 'Close';
+            }
+
+            // ═══════════════════════════════════
+            //  LANGUAGE SYSTEM
+            // ═══════════════════════════════════
+            let currentLang = 'ar';
+            const translations = {
+                ar: {
+                    logoSub: 'ألعاب الأزواج',
+                    connectedBadge: 'متصل',
+                    navHome: 'الرئيسية',
+                    navScratch: 'بطاقات مفاجأة',
+                    navWheel: 'عجلة التحديات',
+                    navDice: 'نرد المهام',
+                    navTod: 'صراحة وجرأة',
+                    navOnline: 'اللعب معاً',
+                    heroBadge: '✨ ألعاب مميزة للأزواج ✨',
+                    heroTitle: 'تجارب لا تُنسى<br><span>مع من تحب</span>',
+                    heroDesc: 'مجموعة من الألعاب الممتعة والمميزة لتقوية الرابطة بينكما واكتشاف أوقات جديدة من الفرح',
+                    startBtn: 'ابدأ اللعب الآن',
+                    statTasks: 'مهمة ونشاط',
+                    statQuestions: 'سؤال متنوع',
+                    statGames: 'ألعاب مختلفة',
+                    statFree: 'مجاني دائماً',
+                    scratchTitle: 'بطاقات المفاجآت 🎴',
+                    scratchDesc: 'احكوا البطاقة معاً لاكتشاف نشاط أو تحدي ممتع',
+                    scratchDefault: '<strong>اضغط على أي بطاقة</strong> لاكتشاف ما بداخلها 🎉',
+                    newCards: '↺ بطاقات جديدة',
+                    revealAll: '👁️ كشف الكل',
+                    wheelTitle: 'عجلة التحديات 🎡',
+                    wheelDesc: 'أدوروا العجلة واكتشفوا التحدي الذي ينتظركما',
+                    wheelResultLabel: 'النتيجة الحالية',
+                    wheelDefault: 'أدوروا العجلة 🎡',
+                    spinNow: '🎯 أدر العجلة الآن!',
+                    wheelHistoryTitle: 'السجل الأخير',
+                    wheelHistoryEmpty: 'لم يتم الدوران بعد',
+                    diceTitle: 'نرد المهام 🎲',
+                    diceDesc: 'أكثر من 250 مهمة ممتعة ومتنوعة',
+                    currentTask: 'المهمة الحالية',
+                    diceDefault: 'ارمِ النرد لتظهر مهمة ممتعة!',
+                    rollDice: '🎲 ارمِ النرد!',
+                    diceHint: 'أو اضغط على النرد مباشرة',
+                    todTitle: 'صراحة وجرأة 🔥',
+                    todDesc: 'أكثر من 400 سؤال وتحدي على 4 درجات من الشدة',
+                    rollDiePrompt: 'ارمِ النرد',
+                    rollDieDesc: 'لتحديد درجة شدة السؤال',
+                    truthBtn: '💬 صراحة',
+                    dareBtn: '🔥 جرأة',
+                    statRounds: 'الجولات',
+                    statTruthsLabel: 'صراحة',
+                    statDaresLabel: 'جرأة',
+                    todPlaceholder: 'ارمِ النرد أو اضغط على صراحة / جرأة لتبدأ',
+                    nextQuestion: 'السؤال التالي ←',
+                    onlineTitle: 'اللعب معاً أونلاين 🌐',
+                    onlineDesc: 'العبا معاً من أي مكان بالعالم في الوقت الحقيقي',
+                    statusIdle: 'غير متصل — أنشئ غرفة أو انضم لواحدة',
+                    createRoom: 'إنشاء غرفة',
+                    joinRoom: 'انضمام',
+                    joinGo: '🔗 انضمام للغرفة',
+                    roomCodeLabel: 'رمز غرفتك',
+                    roomHint: 'شارك هذا الرمز مع شريكك ليتصل بك',
+                    copyCode: '📋 نسخ الرمز',
+                    partnerConnected: '✅ شريكك متصل الآن!',
+                    partnerSub: 'النتائج تُشارك تلقائياً',
+                    chatTitle: 'الدردشة',
+                    chatEmpty: 'لا رسائل بعد... ابدأ! 💬',
+                    sendMsg: '↑ إرسال',
+                    footer: 'صُنع بـ ❤️ — حبيبي، ألعاب الأزواج 2025',
+                    intensity_light: 'خفيف 🌸',
+                    intensity_medium: 'متوسط 🔥',
+                    intensity_hard: 'صعب 💫',
+                    intensity_extreme: 'متطرف ⚡',
+                    intensity_light_desc: 'سهل ومريح للجميع',
+                    intensity_medium_desc: 'أعمق قليلاً',
+                    intensity_hard_desc: 'للشجعان!',
+                    intensity_extreme_desc: 'للجريئين فقط!',
+                    toastRoomReady: '✅ الغرفة جاهزة: ',
+                    toastConnected: '🎉 تم الاتصال بشريكك!',
+                    toastDisconnected: '⚠️ انقطع الاتصال',
+                    toastCopied: '📋 تم النسخ: ',
+                    featureSync: 'مزامنة فورية',
+                    featureSyncDesc: 'كل نتائج الألعاب تنتقل تلقائياً لشريكك فور ظهورها',
+                    featureSecure: 'اتصال مشفر',
+                    featureSecureDesc: 'اتصال مباشر بين المتصفحين بدون خوادم وسيطة',
+                    featureFast: 'لحظي وسريع',
+                    featureFastDesc: 'لا تأخير، لا تسجيل، لا إعلانات — مجرد لعب ممتع',
+                    featureChat: 'دردشة مباشرة',
+                    featureChatDesc: 'تواصلا نصياً أثناء اللعب لمزيد من المرح',
+                    howToTitle: 'كيف تلعبا معاً؟',
+                    howToStep1: 'الأول ينشئ غرفة ويرسل الرمز',
+                    howToStep2: 'الثاني ينضم بالرمز',
+                    howToStep3: 'العبا معاً من أي مكان! 🌍',
+                    gameScratchTitle: 'بطاقات المفاجآت',
+                    gameScratchDesc: 'احكوا البطاقة معاً لاكتشاف نشاط أو تحدي رومانسي مميز',
+                    gameScratchCount: '12 بطاقة',
+                    gameWheelTitle: 'عجلة التحديات',
+                    gameWheelDesc: 'أدوروا العجلة واكتشفوا التحدي أو النشاط الذي ينتظركما',
+                    gameWheelCount: '16 تحدي',
+                    gameDiceTitle: 'نرد المهام',
+                    gameDiceDesc: 'ارموا النرد للحصول على مهمة ممتعة ومميزة لكليكما',
+                    gameDiceCount: '+250 مهمة',
+                    gameTodTitle: 'صراحة وجرأة',
+                    gameTodDesc: 'اكتشفا بعضكما أكثر بأسئلة ومهام على درجات متعددة',
+                    gameTodCount: '+400 سؤال',
+                    gameOnlineTitle: 'اللعب معاً أونلاين',
+                    gameOnlineDesc: 'العبا معاً من أي مكان عبر الإنترنت في الوقت الحقيقي',
+                    gameOnlineCount: 'مباشر',
+                },
+                en: {
+                    logoSub: 'Couples Games',
+                    connectedBadge: 'Connected',
+                    navHome: 'Home',
+                    navScratch: 'Scratch Cards',
+                    navWheel: 'Wheel',
+                    navDice: 'Dice Tasks',
+                    navTod: 'Truth or Dare',
+                    navOnline: 'Play Together',
+                    heroBadge: '✨ Featured Couples Games ✨',
+                    heroTitle: 'Unforgettable Experiences<br><span>With Your Love</span>',
+                    heroDesc: 'A collection of fun and unique games to strengthen your bond and discover new moments of joy',
+                    startBtn: 'Start Playing Now',
+                    statTasks: 'Tasks & Activities',
+                    statQuestions: 'Varied Questions',
+                    statGames: 'Different Games',
+                    statFree: 'Always Free',
+                    scratchTitle: 'Scratch Cards 🎴',
+                    scratchDesc: 'Scratch together to discover a fun activity or romantic challenge',
+                    scratchDefault: '<strong>Tap any card</strong> to discover what\'s inside 🎉',
+                    newCards: '↺ New Cards',
+                    revealAll: '👁️ Reveal All',
+                    wheelTitle: 'Challenge Wheel 🎡',
+                    wheelDesc: 'Spin the wheel and discover the challenge waiting for you',
+                    wheelResultLabel: 'Current Result',
+                    wheelDefault: 'Spin the wheel 🎡',
+                    spinNow: '🎯 Spin Now!',
+                    wheelHistoryTitle: 'Recent History',
+                    wheelHistoryEmpty: 'No spins yet',
+                    diceTitle: 'Dice Tasks 🎲',
+                    diceDesc: 'Over 250 fun and varied tasks',
+                    currentTask: 'Current Task',
+                    diceDefault: 'Roll the dice for a fun task!',
+                    rollDice: '🎲 Roll Dice!',
+                    diceHint: 'Or tap the dice directly',
+                    todTitle: 'Truth or Dare 🔥',
+                    todDesc: 'Over 400 questions and challenges across 4 intensity levels',
+                    rollDiePrompt: 'Roll the die',
+                    rollDieDesc: 'To set the intensity level',
+                    truthBtn: '💬 Truth',
+                    dareBtn: '🔥 Dare',
+                    statRounds: 'Rounds',
+                    statTruthsLabel: 'Truths',
+                    statDaresLabel: 'Dares',
+                    todPlaceholder: 'Roll the die or press Truth / Dare to begin',
+                    nextQuestion: 'Next Question →',
+                    onlineTitle: 'Play Together Online 🌐',
+                    onlineDesc: 'Play together from anywhere in the world in real time',
+                    statusIdle: 'Offline — Create a room or join one',
+                    createRoom: 'Create Room',
+                    joinRoom: 'Join',
+                    joinGo: '🔗 Join Room',
+                    roomCodeLabel: 'Your Room Code',
+                    roomHint: 'Share this code with your partner to connect',
+                    copyCode: '📋 Copy Code',
+                    partnerConnected: '✅ Your partner is connected!',
+                    partnerSub: 'Results are shared automatically',
+                    chatTitle: 'Chat',
+                    chatEmpty: 'No messages yet... start chatting! 💬',
+                    sendMsg: '↑ Send',
+                    footer: 'Made with ❤️ — Habibi, Couples Games 2025',
+                    intensity_light: 'Light 🌸',
+                    intensity_medium: 'Medium 🔥',
+                    intensity_hard: 'Spicy 💫',
+                    intensity_extreme: 'Extreme ⚡',
+                    intensity_light_desc: 'Easy and comfortable',
+                    intensity_medium_desc: 'A bit deeper',
+                    intensity_hard_desc: 'For the brave!',
+                    intensity_extreme_desc: 'For the daring only!',
+                    toastRoomReady: '✅ Room ready: ',
+                    toastConnected: '🎉 Connected to your partner!',
+                    toastDisconnected: '⚠️ Connection lost',
+                    toastCopied: '📋 Copied: ',
+                    featureSync: 'Instant Sync',
+                    featureSyncDesc: 'All game results are automatically shared with your partner',
+                    featureSecure: 'Encrypted Connection',
+                    featureSecureDesc: 'Direct browser-to-browser connection with no middle servers',
+                    featureFast: 'Lightning Fast',
+                    featureFastDesc: 'No lag, no signup, no ads — just pure fun',
+                    featureChat: 'Live Chat',
+                    featureChatDesc: 'Text each other while playing for more fun',
+                    howToTitle: 'How to play together?',
+                    howToStep1: 'One creates a room and shares the code',
+                    howToStep2: 'The other joins with the code',
+                    howToStep3: 'Play together from anywhere! 🌍',
+                    gameScratchTitle: 'Scratch Cards',
+                    gameScratchDesc: 'Scratch together to discover a fun romantic activity',
+                    gameScratchCount: '12 Cards',
+                    gameWheelTitle: 'Challenge Wheel',
+                    gameWheelDesc: 'Spin the wheel and discover the challenge awaiting you',
+                    gameWheelCount: '16 Challenges',
+                    gameDiceTitle: 'Dice Tasks',
+                    gameDiceDesc: 'Roll the dice for a fun and unique task for both of you',
+                    gameDiceCount: '+250 Tasks',
+                    gameTodTitle: 'Truth or Dare',
+                    gameTodDesc: 'Discover each other more with multi-level questions',
+                    gameTodCount: '+400 Questions',
+                    gameOnlineTitle: 'Play Together Online',
+                    gameOnlineDesc: 'Play together from anywhere in real time',
+                    gameOnlineCount: 'Live',
+                }
+            };
+
+            function t(key) {
+                return translations[currentLang] && translations[currentLang][key] || translations['ar'][key] ||
+                    key;
+            }
+
+            function updateAllI18n() {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    const translated = t(key);
+                    if (translated && !el.hasAttribute('data-i18n-html')) {
+                        el.textContent = translated;
+                    }
+                });
+                document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-html');
+                    const translated = t(key);
+                    if (translated) el.innerHTML = translated;
+                });
+                if (currentLang === 'en') {
+                    document.body.classList.add('ltr');
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                } else {
+                    document.body.classList.remove('ltr');
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                }
+                updateMonetagI18n();
+                buildHomeGamesGrid();
+                buildOnlineFeatures();
+                if (document.getElementById('sec-scratch').classList.contains('active')) {
+                    const detail = document.getElementById('scratchDetail');
+                    if (detail && detail.getAttribute('data-default') === 'true') {
+                        detail.innerHTML = t('scratchDefault');
+                    }
+                }
+                if (document.getElementById('sec-wheel').classList.contains('active')) {
+                    const res = document.getElementById('wheelResult');
+                    if (res && res.getAttribute('data-default') === 'true') {
+                        res.textContent = t('wheelDefault');
+                    }
+                    updateWheelHistory();
+                }
+                if (document.getElementById('sec-dice').classList.contains('active')) {
+                    const dr = document.getElementById('diceResult');
+                    if (dr && dr.getAttribute('data-default') === 'true') {
+                        dr.textContent = t('diceDefault');
+                    }
+                }
+                if (document.getElementById('sec-tod').classList.contains('active')) {
+                    const card = document.getElementById('todQCard');
+                    if (card && card.getAttribute('data-default') === 'true') {
+                        card.innerHTML =
+                            '<div style="font-size:48px">🔥</div><div class="tod-q-text" style="color:var(--text2)">' +
+                            t('todPlaceholder') + '</div>';
+                    }
+                }
+                document.getElementById('langToggle').textContent = currentLang === 'ar' ? 'EN' : 'AR';
+            }
+
+            // ═══════════════════════════════════
+            //  STARS BACKGROUND
+            // ═══════════════════════════════════
+            (function() {
+                const el = document.getElementById('starsEl');
+                for (let i = 0; i < 140; i++) {
+                    const s = document.createElement('div');
+                    s.className = 'star';
+                    const size = Math.random() * 2.8 + 0.4;
+                    s.style.cssText =
+                        `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;
+                --dur:${2+Math.random()*5}s;--delay:${Math.random()*6}s;
+                --min-op:${0.04+Math.random()*0.12};--max-op:${0.35+Math.random()*0.55}`;
+                    el.appendChild(s);
+                }
+            })();
+
+            // ═══════════════════════════════════
+            //  AUDIO ENGINE
+            // ═══════════════════════════════════
+            let ctx = null,
+                soundOn = true,
+                musicOn = false,
+                noiseCache = null,
+                musicNodes = null;
+
+            function getCtx() {
+                if (!ctx) {
+                    try { ctx = new(window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; }
+                }
+                if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+                return ctx;
+            }
+
+            function mkNoise(c, dur) {
+                const sr = c.sampleRate,
+                    len = Math.floor(sr * dur),
+                    b = c.createBuffer(1, len, sr),
+                    d = b.getChannelData(0);
+                for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+                return b;
+            }
+
+            function beep(freq, type = 'sine', dur = 0.12, vol = 0.22) {
+                if (!soundOn) return;
+                const c = getCtx();
+                if (!c) return;
+                const o = c.createOscillator(),
+                    g = c.createGain();
+                o.type = type;
+                o.frequency.value = freq;
+                g.gain.setValueAtTime(0, c.currentTime);
+                g.gain.linearRampToValueAtTime(vol, c.currentTime + 0.01);
+                g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
+                o.connect(g);
+                g.connect(c.destination);
+                o.start(c.currentTime);
+                o.stop(c.currentTime + dur);
+            }
+
+            function playClick() { beep(720, 'sine', 0.07, 0.16); }
+
+            function playTab() { beep(660, 'sine', 0.06, 0.1);
+                setTimeout(() => beep(880, 'sine', 0.05, 0.09), 55); }
+
+            function playWin() { [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => beep(f, 'sine', 0.28, 0.18), i *
+                    100)); }
+
+            function playBtn() { beep(540, 'sine', 0.09, 0.18); }
+
+            function playDice() {
+                if (!soundOn) return;
+                const c = getCtx();
+                if (!c) return;
+                for (let i = 0; i < 6; i++) {
+                    const t = c.currentTime + i * 0.06;
+                    const b = mkNoise(c, 0.1),
+                        s = c.createBufferSource(),
+                        f = c.createBiquadFilter(),
+                        g = c.createGain();
+                    s.buffer = b;
+                    f.type = 'bandpass';
+                    f.frequency.value = 700 + Math.random() * 500;
+                    g.gain.setValueAtTime(0, t);
+                    g.gain.linearRampToValueAtTime(0.3, t + 0.005);
+                    g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+                    s.connect(f);
+                    f.connect(g);
+                    g.connect(c.destination);
+                    s.start(t);
+                    s.stop(t + 0.1);
+                }
+            }
+
+            function playSpin() {
+                if (!soundOn) return;
+                const c = getCtx();
+                if (!c) return;
+                const d = 3.8,
+                    n = mkNoise(c, d),
+                    s = c.createBufferSource(),
+                    f = c.createBiquadFilter(),
+                    g = c.createGain();
+                s.buffer = n;
+                f.type = 'highpass';
+                f.frequency.setValueAtTime(180, c.currentTime);
+                f.frequency.linearRampToValueAtTime(2600, c.currentTime + 1.7);
+                f.frequency.linearRampToValueAtTime(100, c.currentTime + 3.6);
+                g.gain.setValueAtTime(0, c.currentTime);
+                g.gain.linearRampToValueAtTime(0.1, c.currentTime + 0.3);
+                g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 3.8);
+                s.connect(f);
+                f.connect(g);
+                g.connect(c.destination);
+                s.start(c.currentTime);
+                s.stop(c.currentTime + d);
+            }
+
+            function playConnect() { [330, 440, 550, 660].forEach((f, i) => setTimeout(() => beep(f, 'sine', 0.28, 0.2), i *
+                    90)); }
+
+            function playScratch() {
+                if (!soundOn) return;
+                const c = getCtx();
+                if (!c) return;
+                if (!noiseCache) noiseCache = mkNoise(c, 0.7);
+                const s = c.createBufferSource(),
+                    f = c.createBiquadFilter(),
+                    g = c.createGain();
+                s.buffer = noiseCache;
+                s.playbackRate.value = 0.7 + Math.random() * 0.5;
+                f.type = 'bandpass';
+                f.frequency.value = 1000 + Math.random() * 700;
+                f.Q.value = 2;
+                g.gain.setValueAtTime(0, c.currentTime);
+                g.gain.linearRampToValueAtTime(0.25, c.currentTime + 0.015);
+                g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.16);
+                s.connect(f);
+                f.connect(g);
+                g.connect(c.destination);
+                s.start();
+                s.stop(c.currentTime + 0.16);
+            }
+
+            function startMusic() {
+                if (musicOn) return;
+                const c = getCtx();
+                if (!c) return;
+                musicOn = true;
+                musicNodes = [];
+                const freqs = [196, 246.94, 293.66, 329.63, 392];
+                freqs.forEach((freq, i) => {
+                    const o = c.createOscillator();
+                    const g = c.createGain();
+                    o.type = 'sine';
+                    o.frequency.value = freq;
+                    g.gain.setValueAtTime(0, c.currentTime);
+                    g.gain.linearRampToValueAtTime(0.03, c.currentTime + 2);
+                    const lfo = c.createOscillator();
+                    const lfoG = c.createGain();
+                    lfo.frequency.value = 0.02 + i * 0.015;
+                    lfoG.gain.value = 0.015;
+                    lfo.connect(lfoG);
+                    lfoG.connect(g.gain);
+                    o.connect(g);
+                    g.connect(c.destination);
+                    o.start();
+                    lfo.start();
+                    musicNodes.push({ o, g, lfo, lfoG });
+                });
+                document.getElementById('musicToggle').classList.add('active');
+            }
+
+            function stopMusic() {
+                if (!musicOn) return;
+                musicOn = false;
+                if (musicNodes) {
+                    musicNodes.forEach(n => {
+                        try { n.o.stop();
+                            n.lfo.stop();
+                            n.g.disconnect();
+                            n.lfoG.disconnect(); } catch (e) {}
+                    });
+                    musicNodes = null;
+                }
+                document.getElementById('musicToggle').classList.remove('active');
+            }
+
+            function toggleMusic() {
+                if (musicOn) { stopMusic(); } else { startMusic(); }
+                playClick();
+            }
+
+            // ═══════════════════════════════════
+            //  HELPERS
+            // ═══════════════════════════════════
+            const $ = id => document.getElementById(id);
+            const rand = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+
+            function toast(msg, dur = 2800) {
+                document.querySelectorAll('.toast').forEach(t => t.remove());
+                const el = document.createElement('div');
+                el.className = 'toast';
+                el.textContent = msg;
+                document.body.appendChild(el);
+                setTimeout(() => { el.classList.add('out');
+                    setTimeout(() => el.remove(), 320); }, dur);
+            }
+            if (!CanvasRenderingContext2D.prototype.roundRect) {
+                CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                    if (w < 2 * r) r = w / 2;
+                    if (h < 2 * r) r = h / 2;
+                    this.moveTo(x + r, y);
+                    this.lineTo(x + w - r, y);
+                    this.quadraticCurveTo(x + w, y, x + w, y + r);
+                    this.lineTo(x + w, y + h - r);
+                    this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+                    this.lineTo(x + r, y + h);
+                    this.quadraticCurveTo(x, y + h, x, y + h - r);
+                    this.lineTo(x, y + r);
+                    this.quadraticCurveTo(x, y, x + r, y);
+                    return this;
+                };
+            }
+
+            // ═══════════════════════════════════
+            //  NAVIGATION
+            // ═══════════════════════════════════
+            function switchTab(name) {
+                playTab();
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                const sec = $('sec-' + name);
+                if (sec) sec.classList.add('active');
+                const btn = document.querySelector(`[data-tab="${name}"]`);
+                if (btn) btn.classList.add('active');
+                if (name === 'wheel') setTimeout(() => drawWheel(wAngle), 60);
+                if (name === 'scratch') {
+                    const detail = document.getElementById('scratchDetail');
+                    if (detail && detail.getAttribute('data-default') === 'true') detail.innerHTML = t('scratchDefault');
+                }
+                window.scrollTo(0, 0);
+                if (name === 'online') { const nd = $('notifDot'); if (nd) nd.classList.remove('show'); }
+            }
+            window.switchTab = switchTab;
+            window.revealAll = function() {
+                document.querySelectorAll('.scratch-canvas').forEach(cv => {
+                    const c = cv.getContext('2d');
+                    c.clearRect(0, 0, cv.width, cv.height);
+                });
+                const detail = document.getElementById('scratchDetail');
+                if (detail) { detail.innerHTML = t('scratchDefault');
+                    detail.setAttribute('data-default', 'true'); }
+                playWin();
+            };
+            window.toggleMusic = toggleMusic;
+
+            document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(b.dataset
+            .tab)));
+            document.getElementById('soundToggle').addEventListener('click', () => {
+                soundOn = !soundOn;
+                $('soundToggle').textContent = soundOn ? '🔊' : '🔇';
+                if (soundOn) playClick();
+            });
+            document.getElementById('musicToggle').addEventListener('click', toggleMusic);
+            document.getElementById('langToggle').addEventListener('click', () => {
+                currentLang = currentLang === 'ar' ? 'en' : 'ar';
+                updateAllI18n();
+                playClick();
+                buildScratch();
+                drawWheel(wAngle);
+                updateWheelHistory();
+                const detail = document.getElementById('scratchDetail');
+                if (detail) { detail.innerHTML = t('scratchDefault');
+                    detail.setAttribute('data-default', 'true'); }
+                const wheelResult = document.getElementById('wheelResult');
+                if (wheelResult && wHistory.length === 0) { wheelResult.textContent = t('wheelDefault');
+                    wheelResult.setAttribute('data-default', 'true'); }
+                const diceResult = document.getElementById('diceResult');
+                if (diceResult && diceResult.getAttribute('data-default') === 'true') diceResult.textContent = t(
+                    'diceDefault');
+            });
+            document.getElementById('logoArea').addEventListener('click', () => switchTab('home'));
+            document.getElementById('heroStartBtn').addEventListener('click', () => switchTab('scratch'));
+            ['touchstart', 'mousedown', 'click'].forEach(ev => document.addEventListener(ev, () => { const c = getCtx(); if (
+                    c && c.state === 'suspended') c.resume(); }, { once: true }));
+
+            // ═══════════════════════════════════
+            //  DATA
+            // ═══════════════════════════════════
+            function getScratchItems() {
+                if (currentLang === 'en') {
+                    return [
+                        { emoji: '🎬', short: 'Movie & Popcorn',
+                            full: '<strong>Home Cinema Night</strong> — Pick a movie or series to watch together. Put away your phones, prepare popcorn and drinks, and enjoy!' },
+                        { emoji: '🍳', short: 'Cook Together',
+                            full: '<strong>Our Kitchen</strong> — Choose a new recipe you\'ve never tried before and cook it together. The fun is in the journey, not just the result 🍽️' },
+                        { emoji: '💌', short: 'Love Letters',
+                            full: '<strong>Writing Time</strong> — Each partner writes a sincere love letter mentioning the most beautiful memories and what they love most about the other, then exchange them' },
+                        { emoji: '🌅', short: 'Outdoor Stroll',
+                            full: '<strong>Fresh Air Walk</strong> — Go out together for a walk in a park or beautiful street. Talk without phones for a full hour and enjoy nature and conversation' },
+                        { emoji: '🎮', short: 'Video Games',
+                            full: '<strong>Co-op Game</strong> — Play a cooperative or competitive video game together. The loser buys dinner or does a task for the winner 😄' },
+                        { emoji: '📸', short: 'Photo Session',
+                            full: '<strong>Memory Photos</strong> — Dress up nicely and take beautiful photos together in a favorite spot or at home with creative lighting' },
+                        { emoji: '⭐', short: 'Stargazing',
+                            full: '<strong>Night Under the Stars</strong> — Sit outside at night and gaze at the stars together. Talk about your dreams and future aspirations' },
+                        { emoji: '🎨', short: 'Draw Together',
+                            full: '<strong>Amateur Artists</strong> — Get some drawing supplies or colors and draw a picture of each other or a chosen theme. The fun is in the attempt!' },
+                        { emoji: '🧁', short: 'Bake Together',
+                            full: '<strong>Love Bakery</strong> — Make a cake or cookies together. Decorate with cream and colors and enjoy with a warm cup of tea 🍵' },
+                        { emoji: '💆', short: 'Massage Time',
+                            full: '<strong>Relaxing Moment</strong> — Give each other a gentle shoulder and hand massage for 10 minutes. Light candles and play soft music 🕯️' },
+                        { emoji: '📝', short: 'Bucket List',
+                            full: '<strong>Dream List</strong> — Write a list together of 20 things you want to do as a couple in the next 5 years. Dream big!' },
+                        { emoji: '🎵', short: 'Dance Party',
+                            full: '<strong>Living Room Dance</strong> — Create a playlist of your favorite songs and dance together in the living room for 15 minutes. No judgment!' },
+                    ];
+                }
+                return [
+                    { emoji: '🎬', short: 'فيلم وفشار',
+                        full: '<strong>ليلة سينما في البيت</strong> — اختارا فيلماً أو مسلسلاً ليشاهداه معاً. قاطعا الهواتف، وجهزا الفشار والمشروبات، واستمتعا بوقت مميز!' },
+                    { emoji: '🍳', short: 'نطبخ سوية',
+                        full: '<strong>مطبخنا الخاص</strong> — اختارا وصفة جديدة لم تجرباها من قبل، واطبخاها معاً. المتعة في الطريق لا في النتيجة فقط 🍽️' },
+                    { emoji: '💌', short: 'رسائل الحب',
+                        full: '<strong>وقت الكتابة</strong> — كل طرف يكتب للآخر رسالة حب صادقة يذكر فيها أجمل الذكريات وأكثر ما يحبه في الآخر، ثم يتبادلانها' },
+                    { emoji: '🌅', short: 'نزهة خارجية',
+                        full: '<strong>هواء طلق ومشي</strong> — اخرجا معاً للمشي في حديقة أو شارع جميل. تحدثا بلا هواتف لمدة ساعة كاملة واستمتعا بالطبيعة والحديث' },
+                    { emoji: '🎮', short: 'ألعاب فيديو',
+                        full: '<strong>لعبة ثنائية</strong> — العبا لعبة فيديو تعاونية أو تنافسية معاً. الخاسر يدفع العشاء أو يقوم بمهمة للفائز 😄' },
+                    { emoji: '📸', short: 'جلسة تصوير',
+                        full: '<strong>ذكريات بالصور</strong> — ارتديا ملابس مميزة والتقطا صوراً جميلة معاً في مكان مفضل أو بالمنزل بإضاءة مبدعة' },
+                    { emoji: '⭐', short: 'مشاهدة النجوم',
+                        full: '<strong>ليلة تحت النجوم</strong> — اجلسا في الخارج ليلاً وتأملا النجوم معاً. تحدثا عن أحلامكما وطموحاتكما المستقبلية' },
+                    { emoji: '🎨', short: 'نرسم سوية',
+                        full: '<strong>فنانون هواة</strong> — اشتريا أدوات رسم أو ألوان وارسما صورة لبعضكما أو موضوعاً تختارانه. المتعة في المحاولة وليس في الكمال' },
+                    { emoji: '🧁', short: 'نخبز سوية',
+                        full: '<strong>مخبز الحب</strong> — اصنعا معاً كيكة أو كعكات. زيناها بالكريمة والألوان وتناولاها معاً مع كوب شاي دافئ 🍵' },
+                    { emoji: '💆', short: 'جلسة مساج',
+                        full: '<strong>لحظة استرخاء</strong> — قدّما لبعضكما مساج لطيف للكتفين واليدين لمدة 10 دقائق. أشعلا الشموع وشغّلا موسيقى هادئة 🕯️' },
+                    { emoji: '📝', short: 'قائمة الأحلام',
+                        full: '<strong>قائمة الأمنيات</strong> — اكتبا معاً قائمة بـ 20 شيئاً تريدان فعله كثنائي في السنوات الخمس القادمة. احلما كبيراً!' },
+                    { emoji: '🎵', short: 'حفلة رقص',
+                        full: '<strong>رقصة الصالون</strong> — اصنعا قائمة تشغيل من أغانيكما المفضلة وارقصا معاً في الصالون لمدة 15 دقيقة. بدون أحكام!' },
+                ];
+            }
+
+            function getWheelItems() {
+                if (currentLang === 'en') {
+                    return [
+                        { text: '🎵 Dance a full song', color: '#E84393' }, { text: '📞 Call a mutual friend',
+                            color: '#9333EA' }, { text: '🍕 Order new food', color: '#F59E0B' },
+                        { text: '💌 Exchange voice notes', color: '#10B981' }, { text: '🎤 Sing together',
+                            color: '#3B82F6' }, { text: '🤗 60-sec hug', color: '#EF4444' },
+                        { text: '🎲 Play card game', color: '#06B6D4' }, { text: '📝 Write dream list',
+                            color: '#8B5CF6' }, { text: '🌙 Evening walk', color: '#F43F5E' },
+                        { text: '☕ Quiet coffee', color: '#D97706' }, { text: '🎬 Surprise movie',
+                        color: '#059669' }, { text: '💝 Say 3 things you love', color: '#7C3AED' },
+                        { text: '🕯️ Candlelit talk', color: '#DC2626' }, { text: '📖 Read together',
+                            color: '#0891B2' }, { text: '🎨 Create art together', color: '#4F46E5' },
+                        { text: '🍳 Make breakfast', color: '#EA580C' },
+                    ];
+                }
+                return [
+                    { text: '🎵 ارقصا أغنية كاملة', color: '#E84393' }, { text: '📞 اتصلا بصديق مشترك',
+                    color: '#9333EA' }, { text: '🍕 اطلبا أكلة جديدة', color: '#F59E0B' },
+                    { text: '💌 تبادلا رسالة صوتية', color: '#10B981' }, { text: '🎤 غنيا معاً أغنية',
+                    color: '#3B82F6' }, { text: '🤗 احتضانة 60 ثانية', color: '#EF4444' },
+                    { text: '🎲 العبا لعبة ورق', color: '#06B6D4' }, { text: '📝 اكتبا قائمة أحلام',
+                    color: '#8B5CF6' }, { text: '🌙 نزهة مسائية', color: '#F43F5E' },
+                    { text: '☕ جلسة قهوة هادئة', color: '#D97706' }, { text: '🎬 فيلم مفاجأة', color: '#059669' },
+                    { text: '💝 قولا 3 أشياء تحبانها', color: '#7C3AED' }, { text: '🕯️ حديث على ضوء الشموع',
+                        color: '#DC2626' }, { text: '📖 اقرآ معاً', color: '#0891B2' },
+                    { text: '🎨 اصنعا فناً معاً', color: '#4F46E5' }, { text: '🍳 أعدّا فطوراً معاً',
+                    color: '#EA580C' },
+                ];
+            }
+
+            function getDiceTasks() {
+                if (currentLang === 'en') {
+                    return [
+                        { text: 'Write a small love note and hide it where your partner will find it',
+                            cat: '💌 Romantic' },
+                        { text: 'Tell your partner three things you love about them from the heart',
+                        cat: '💌 Romantic' },
+                        { text: 'Hug each other for 60 seconds without speaking', cat: '💌 Romantic' },
+                        { text: 'Plan a romantic date for the upcoming week', cat: '💌 Romantic' },
+                        { text: 'Share your favorite memory together from this year', cat: '💌 Romantic' },
+                        { text: 'Make your partner their favorite drink right now', cat: '💌 Romantic' },
+                        { text: 'Go for a 15-minute walk outdoors together', cat: '💌 Romantic' },
+                        { text: 'Compete: who can list more facts about the other in 1 minute?',
+                        cat: '😄 Fun' },
+                        { text: 'Imitation contest: who can mimic the other better?', cat: '😄 Fun' },
+                        { text: 'Create a story together, one sentence at a time', cat: '😄 Fun' },
+                        { text: 'Pick a song and dance to it right now', cat: '😄 Fun' },
+                        { text: 'Play Tic-Tac-Toe — loser does a task for the winner', cat: '😄 Fun' },
+                        { text: 'Invent a name for your dream restaurant or café together', cat: '😄 Fun' },
+                        { text: 'Draw a simple painting together with any available tools',
+                        cat: '🎨 Creative' },
+                        { text: 'Take a portrait photo of each other and save it', cat: '🎨 Creative' },
+                        { text: 'Create a movie watchlist for this month', cat: '🎨 Creative' },
+                        { text: 'Plan a dream trip even if you can\'t do it now', cat: '🎨 Creative' },
+                        { text: 'Invent a new dish recipe with ingredients in the kitchen',
+                        cat: '🎨 Creative' },
+                        { text: 'Write a short poem or song about your story together', cat: '🎨 Creative' },
+                        { text: 'Clean and organize one room together in 15 minutes',
+                        cat: '🤝 Cooperative' },
+                        { text: 'Cook a simple meal together with full coordination', cat: '🤝 Cooperative' },
+                        { text: 'Create a weekly shopping list together', cat: '🤝 Cooperative' },
+                        { text: 'Plan a budget for a small nearby trip together', cat: '🤝 Cooperative' },
+                        { text: 'Set shared goals for the next 3 months', cat: '🤝 Cooperative' },
+                        { text: 'Organize your shared photos into an album', cat: '🤝 Cooperative' },
+                        { text: 'Each share something you\'ve wanted to say for a while',
+                        cat: '💬 Communication' },
+                        { text: 'Talk about one dream each of you wants to achieve', cat: '💬 Communication' },
+                        { text: 'Share something that made you happy this week', cat: '💬 Communication' },
+                        { text: 'Tell each other about a person who positively influenced you',
+                            cat: '💬 Communication' },
+                        { text: 'Share your favorite childhood memory', cat: '💬 Communication' },
+                        { text: 'Compete: who finds 5 recipes in 2 minutes?', cat: '🎉 Fun' },
+                        { text: 'Do something you\'ve never done together before this week', cat: '🎉 Fun' },
+                        { text: 'Pick a book to read together this month', cat: '🎉 Fun' },
+                        { text: 'Learn something new together from YouTube for 20 minutes', cat: '🎉 Fun' },
+                        { text: 'Exchange the best joke you know', cat: '🎉 Fun' },
+                        { text: 'Gentle shoulder and head massage for 5 minutes', cat: '🌸 Special' },
+                        { text: 'Sit together without screens for 30 full minutes', cat: '🌸 Special' },
+                        { text: 'Look at your first photos together and reminisce', cat: '🌸 Special' },
+                        { text: 'Exchange words of gratitude for what each of you does', cat: '🌸 Special' },
+                        { text: 'Celebrate a small recent achievement together', cat: '🌸 Special' },
+                    ];
+                }
+                return [
+                    { text: 'اكتب ملاحظة حب صغيرة وضعها في مكان سيجدها شريكك', cat: '💌 رومانسي' },
+                    { text: 'أخبر شريكك بثلاثة أشياء تحبها فيه/فيها من القلب', cat: '💌 رومانسي' },
+                    { text: 'احتضنا بعضكما لمدة 60 ثانية كاملة بدون كلام', cat: '💌 رومانسي' },
+                    { text: 'خططا لـ "موعد" رومانسي خلال الأسبوع القادم', cat: '💌 رومانسي' },
+                    { text: 'شاركا معاً ذكراكما المفضلة من هذا العام', cat: '💌 رومانسي' },
+                    { text: 'أعد لشريكك كوب مشروبه المفضل الآن', cat: '💌 رومانسي' },
+                    { text: 'الخروج معاً لمشي 15 دقيقة في الهواء الطلق', cat: '💌 رومانسي' },
+                    { text: 'تنافسا على من يحفظ أكثر معلومة عن الآخر خلال دقيقة', cat: '😄 ممتع' },
+                    { text: 'مسابقة: من يقلد الآخر بشكل أفضل؟', cat: '😄 ممتع' },
+                    { text: 'احكيا معاً قصة مخترعة جملة جملة بالتبادل', cat: '😄 ممتع' },
+                    { text: 'اختارا أغنية مشتركة ترقصان عليها الآن', cat: '😄 ممتع' },
+                    { text: 'تنافسا في لعبة Tic-Tac-Toe والخاسر ينفذ مهمة للفائز', cat: '😄 ممتع' },
+                    { text: 'ابتكرا معاً اسم لمطعمكما أو كافيه أحلامكما', cat: '😄 ممتع' },
+                    { text: 'ارسما معاً لوحة بسيطة بأي أدوات متاحة', cat: '🎨 إبداعي' },
+                    { text: 'صوّرا "بورتريه" لبعضكما واطبعاه أو احفظاه', cat: '🎨 إبداعي' },
+                    { text: 'اصنعا قائمة أفلام لمشاهدتها معاً هذا الشهر', cat: '🎨 إبداعي' },
+                    { text: 'خططا لرحلة أحلام حتى لو لم تتحقق الآن', cat: '🎨 إبداعي' },
+                    { text: 'ابتكرا وصفة طبق جديد بمكونات موجودة في المطبخ', cat: '🎨 إبداعي' },
+                    { text: 'اكتبا معاً أغنية أو قصيدة قصيرة عن قصتكما', cat: '🎨 إبداعي' },
+                    { text: 'نظّفا ورتّبا غرفة واحدة معاً خلال 15 دقيقة', cat: '🤝 تعاون' },
+                    { text: 'اطبخا وجبة بسيطة معاً بالتنسيق الكامل', cat: '🤝 تعاون' },
+                    { text: 'ضعا قائمة مشتريات لأسبوع كامل بالتوافق', cat: '🤝 تعاون' },
+                    { text: 'خططا لميزانية رحلة صغيرة قريبة معاً', cat: '🤝 تعاون' },
+                    { text: 'أعدّا قائمة أهداف مشتركة للأشهر الثلاثة القادمة', cat: '🤝 تعاون' },
+                    { text: 'رتّبا الصور المشتركة في ألبوم أو مجلد مميز', cat: '🤝 تعاون' },
+                    { text: 'كل طرف يقول شيئاً كان يودّ قوله منذ زمن', cat: '💬 تواصل' },
+                    { text: 'تحدثا عن حلم واحد لكل منكما تودّان تحقيقه', cat: '💬 تواصل' },
+                    { text: 'شاركا بعضكما شيئاً أسعدكما هذا الأسبوع', cat: '💬 تواصل' },
+                    { text: 'تحدثا عن شخص أثّر فيكما إيجابياً ولماذا', cat: '💬 تواصل' },
+                    { text: 'شاركا بعضكما أجمل ذكرى من الطفولة', cat: '💬 تواصل' },
+                    { text: 'تنافسا: من يجد 5 وصفات لمطبخ في دقيقتين؟', cat: '🎉 مرح' },
+                    { text: 'افعلا شيئاً لم تفعلاه معاً من قبل هذا الأسبوع', cat: '🎉 مرح' },
+                    { text: 'اختارا معاً كتاباً لتقرآه معاً هذا الشهر', cat: '🎉 مرح' },
+                    { text: 'جرّبا تعلّم شيء جديد معاً من يوتيوب لـ 20 دقيقة', cat: '🎉 مرح' },
+                    { text: 'تبادلا أحلى مزحة أو نكتة تعرفانها', cat: '🎉 مرح' },
+                    { text: 'مساج لطيف للكتفين والرأس لمدة 5 دقائق', cat: '🌸 خاص' },
+                    { text: 'اجلسا معاً بدون شاشات لمدة 30 دقيقة كاملة', cat: '🌸 خاص' },
+                    { text: 'شاهدا أول صور لكما معاً وتذكرا تلك اللحظات', cat: '🌸 خاص' },
+                    { text: 'تبادلا كلمات شكر وتقدير لما يفعله كل منكما', cat: '🌸 خاص' },
+                    { text: 'احتفلا بإنجاز صغير حدث مؤخراً معاً', cat: '🌸 خاص' },
+                ];
+            }
+
+            function getTruths() {
+                if (currentLang === 'en') {
+                    return {
+                        light: ['What first attracted you to me when we met?',
+                            'What is the most beautiful thing the other has done for you?',
+                            'What is your favorite place you\'d love to visit with me?',
+                            'How would you describe our relationship in one word?',
+                            'What makes you smile whenever you think of me?',
+                            'What quality do you love most about my personality?',
+                            'What is our most beautiful shared memory so far?',
+                            'What is your favorite food you\'d like me to cook for you?',
+                            'How would you like to spend our ideal day off?',
+                            'What song reminds you of me immediately?',
+                        ],
+                        medium: ['Was there a moment you doubted our relationship? How did you overcome it?',
+                            'What is one trait you wish I would improve?',
+                            'What is something you haven\'t told me and want to say now?',
+                            'Have we been through a situation where you felt I misunderstood you?',
+                            'What disagreements do you think we need to handle better?',
+                        ],
+                        hard: ['Have you ever regretted a decision we made together?',
+                            'What is the biggest disappointment you\'ve felt in our relationship?',
+                            'Do you think we handle disagreements correctly?',
+                            'How do you feel when I\'m busy and don\'t give you enough time?',
+                        ],
+                        extreme: [
+                            'What is the one thing that if changed would make our relationship much better?',
+                            'Do you see yourself with me forever? What makes you sure or unsure?',
+                            'Is there a need I\'m not meeting that you wish I knew about?',
+                        ]
+                    };
+                }
+                return {
+                    light: ['ما أول شيء أعجبك فيّ عندما التقينا؟', 'ما هو أجمل شيء فعله الآخر لك حتى الآن؟',
+                        'ما هو مكانك المفضل الذي تودّ زيارته معي؟', 'كيف تصف علاقتنا بكلمة واحدة فقط؟',
+                        'ما هو الشيء الذي يجعلك تبتسم كلما فكّرت فيّ؟', 'ما هي أكثر صفة تحبها في شخصيتي؟',
+                        'ما هي أجمل ذكرى نشترك فيها حتى الآن؟', 'ما هو طعامك المفضل الذي تودّ أن أطبخه لك؟',
+                        'كيف تحب أن نقضي يوم عطلتنا المثالي؟', 'ما هي الأغنية التي تُذكّرك بي فور سماعها؟',
+                    ],
+                    medium: ['هل كانت هناك لحظة شككت فيها في علاقتنا؟ وكيف تجاوزتها؟',
+                        'ما هي الصفة التي تودّ أن أحسّنها في نفسي؟',
+                        'ما هو الشيء الذي لم تخبرني به وتودّ قوله الآن؟',
+                        'هل مررنا بموقف شعرت أنني أسأت فهمك فيه؟',
+                        'ما هي الخلافات التي تعتقد أننا نحتاج لحلّها بشكل أفضل؟',
+                    ],
+                    hard: ['هل سبق أن ندمت على قرار اتخذناه معاً؟', 'ما هي أكبر خيبة أمل شعرت بها في علاقتنا؟',
+                        'هل تعتقد أننا نتعامل بشكل صحيح مع الخلافات؟',
+                        'كيف تشعر عندما أكون مشغولاً ولا أعطيك وقتاً كافياً؟',
+                    ],
+                    extreme: ['ما هو الشيء الوحيد الذي لو تغيّر سيجعل علاقتنا أفضل بكثير؟',
+                        'هل ترى نفسك معي للأبد؟ وما الذي يجعلك متأكداً أو غير متأكد؟',
+                        'هل هناك حاجة لديك لا أوفّيها وتودّ أن أعرفها؟',
+                    ]
+                };
+            }
+
+            function getDares() {
+                if (currentLang === 'en') {
+                    return {
+                        light: ['Sing the first 30 seconds of a favorite romantic song out loud',
+                            'Dance with your partner for one minute to any song',
+                            'Send a voice message telling your partner what you love most about them',
+                            'Cook a light meal for your partner right now',
+                            'Write a short 4-line poem for your partner',
+                        ],
+                        medium: ['Imitate your partner for a minute while they laugh',
+                            'Create a couple name and use it all day',
+                            'Try something new together within the next 24 hours',
+                            'Share a special photo of you two from your phone gallery',
+                        ],
+                        hard: ['Share an old memory you haven\'t told each other before',
+                            'Honestly say what makes each of you think life is more beautiful with the other',
+                            'Document your entire day with a short video and watch it together',
+                        ],
+                        extreme: ['Plan a real surprise for your partner and execute it this week',
+                            'Write long love letters to each other and exchange them after a week',
+                            'Talk completely honestly about your personal dreams and support each other',
+                        ]
+                    };
+                }
+                return {
+                    light: ['غنّ أول 30 ثانية من أغنية رومانسية مفضلة بصوت عالٍ',
+                        'ارقص مع شريكك لمدة دقيقة على أي أغنية',
+                        'أرسل رسالة صوتية لشريكك تخبره فيها بأجمل ما تحبه فيه', 'اطبخ لشريكك وجبة خفيفة الآن',
+                        'اكتب قصيدة قصيرة من 4 أسطر لشريكك',
+                    ],
+                    medium: ['قلّد شريكك أمامه لمدة دقيقة وهو يضحك',
+                        'ابتكر اسماً لكما كزوجين ثم استخدمه طوال اليوم',
+                        'انفذا تحدي الـ "شيء الجديد": جرّبا شيئاً لم تفعلاه معاً من قبل خلال 24 ساعة',
+                        'شاركا صورة مميزة لكما على ذاكرة هاتفكما',
+                    ],
+                    hard: ['شاركا ذاكرة قديمة لم تحكوها لبعضكما من قبل',
+                        'قولا بصدق ما الشيء الذي يجعل كل منكما الحياة أجمل للآخر',
+                        'وثّقا يومكما كاملاً بفيديو قصير وشاهداه معاً',
+                    ],
+                    extreme: ['خططا لمفاجأة حقيقية لشريكك ونفّذاها هذا الأسبوع',
+                        'كتابة رسائل حب طويلة لبعضكما وتبادلها بعد أسبوع',
+                        'تحدّثا بصدق كامل عن أحلامكما الشخصية ودعما بعضكما في تحقيقها',
+                    ]
+                };
+            }
+
+            function getIntensityInfo() {
+                if (currentLang === 'en') {
+                    return {
+                        1: { title: 'Light 🌸', desc: 'Easy & comfortable', level: 'light', color: '#60A5FA' },
+                        2: { title: 'Light 🌸', desc: 'Easy & comfortable', level: 'light', color: '#60A5FA' },
+                        3: { title: 'Medium 🔥', desc: 'A bit deeper', level: 'medium', color: '#F59E0B' },
+                        4: { title: 'Medium 🔥', desc: 'A bit deeper', level: 'medium', color: '#F59E0B' },
+                        5: { title: 'Spicy 💫', desc: 'For the brave!', level: 'hard', color: '#EF4444' },
+                        6: { title: 'Extreme ⚡', desc: 'Daring only!', level: 'extreme', color: '#F43F85' },
+                    };
+                }
+                return {
+                    1: { title: 'خفيف 🌸', desc: 'سهل ومريح للجميع', level: 'light', color: '#60A5FA' },
+                    2: { title: 'خفيف 🌸', desc: 'سهل ومريح للجميع', level: 'light', color: '#60A5FA' },
+                    3: { title: 'متوسط 🔥', desc: 'أعمق قليلاً', level: 'medium', color: '#F59E0B' },
+                    4: { title: 'متوسط 🔥', desc: 'أعمق قليلاً', level: 'medium', color: '#F59E0B' },
+                    5: { title: 'صعب 💫', desc: 'للشجعان!', level: 'hard', color: '#EF4444' },
+                    6: { title: 'متطرف ⚡', desc: 'للجريئين فقط!', level: 'extreme', color: '#F43F85' },
+                };
+            }
+
+            // ═══════════════════════════════════
+            //  HOME GAMES GRID
+            // ═══════════════════════════════════
+            function buildHomeGamesGrid() {
+                const grid = document.getElementById('homeGamesGrid');
+                if (!grid) return;
+                const games = [
+                    { tab: 'scratch', icon: '🎴', titleKey: 'gameScratchTitle', descKey: 'gameScratchDesc',
+                        countKey: 'gameScratchCount' },
+                    { tab: 'wheel', icon: '🎡', titleKey: 'gameWheelTitle', descKey: 'gameWheelDesc',
+                        countKey: 'gameWheelCount' },
+                    { tab: 'dice', icon: '🎲', titleKey: 'gameDiceTitle', descKey: 'gameDiceDesc',
+                        countKey: 'gameDiceCount' },
+                    { tab: 'tod', icon: '🔥', titleKey: 'gameTodTitle', descKey: 'gameTodDesc',
+                    countKey: 'gameTodCount' },
+                    { tab: 'online', icon: '🌐', titleKey: 'gameOnlineTitle', descKey: 'gameOnlineDesc',
+                        countKey: 'gameOnlineCount' },
+                ];
+                grid.innerHTML = games.map(g => `
+            <div class="game-tile" data-goto="${g.tab}">
+              <div class="game-tile-count">${t(g.countKey)}</div>
+              <div class="game-tile-icon">${g.icon}</div>
+              <div class="game-tile-title">${t(g.titleKey)}</div>
+              <div class="game-tile-desc">${t(g.descKey)}</div>
+            </div>`).join('');
+                grid.querySelectorAll('.game-tile').forEach(tile => {
+                    tile.addEventListener('click', () => switchTab(tile.dataset.goto));
+                });
+            }
+
+            function buildOnlineFeatures() {
+                const container = document.getElementById('onlineFeatures');
+                if (!container) return;
+                container.innerHTML = `
+            <div class="feature-item"><div class="feature-icon">🎮</div><div class="feature-text"><h4>${t('featureSync')}</h4><p>${t('featureSyncDesc')}</p></div></div>
+            <div class="feature-item"><div class="feature-icon">🔒</div><div class="feature-text"><h4>${t('featureSecure')}</h4><p>${t('featureSecureDesc')}</p></div></div>
+            <div class="feature-item"><div class="feature-icon">⚡</div><div class="feature-text"><h4>${t('featureFast')}</h4><p>${t('featureFastDesc')}</p></div></div>
+            <div class="feature-item"><div class="feature-icon">💬</div><div class="feature-text"><h4>${t('featureChat')}</h4><p>${t('featureChatDesc')}</p></div></div>
+            <div class="card" style="margin-top:8px;text-align:center;padding:20px">
+              <div style="font-size:36px;margin-bottom:10px">💡</div>
+              <div style="font-size:14px;font-weight:700;margin-bottom:8px">${t('howToTitle')}</div>
+              <div style="font-size:13px;color:var(--text2);line-height:1.9">1️⃣ ${t('howToStep1')}<br>2️⃣ ${t('howToStep2')}<br>3️⃣ ${t('howToStep3')}</div>
+            </div>`;
+            }
+
+            // ═══════════════════════════════════
+            //  SCRATCH CARDS
+            // ═══════════════════════════════════
+            let scratchItems = [],
+                scratchThrottle = false;
+
+            function buildScratch() {
+                const grid = $('scratchGrid');
+                if (!grid) return;
+                grid.innerHTML = '';
+                const items = getScratchItems();
+                const shuffled = [...items].sort(() => Math.random() - 0.5);
+                scratchItems = shuffled;
+                shuffled.forEach((item, idx) => {
+                    const wrap = document.createElement('div');
+                    wrap.className = 'scratch-tile';
+                    wrap.dataset.idx = idx;
+                    wrap.innerHTML =
+                        `<div class="scratch-inner"><div class="scratch-emoji">${item.emoji}</div><div class="scratch-label">${item.short}</div></div>`;
+                    const cv = document.createElement('canvas');
+                    cv.className = 'scratch-canvas';
+                    wrap.appendChild(cv);
+                    grid.appendChild(wrap);
+                    setTimeout(() => initScratchCanvas(cv, item), 15);
+                    wrap.addEventListener('click', () => { showScratchDetail(idx);
+                        playClick(); });
+                });
+                const detail = document.getElementById('scratchDetail');
+                if (detail) { detail.innerHTML = t('scratchDefault');
+                    detail.setAttribute('data-default', 'true'); }
+            }
+
+            function showScratchDetail(idx) {
+                if (scratchItems[idx]) {
+                    const detail = document.getElementById('scratchDetail');
+                    if (detail) { detail.innerHTML = scratchItems[idx].full;
+                        detail.setAttribute('data-default', 'false'); }
+                }
+            }
+
+            function initScratchCanvas(cv, item) {
+                const p = cv.parentElement;
+                if (!p) return;
+                const W = p.offsetWidth || 150,
+                    H = p.offsetHeight || 150;
+                cv.width = W;
+                cv.height = H;
+                const c = cv.getContext('2d');
+                const g = c.createLinearGradient(0, 0, W, H);
+                g.addColorStop(0, '#2D1B3D');
+                g.addColorStop(0.5, '#4A2E6A');
+                g.addColorStop(1, '#1E1028');
+                c.fillStyle = g;
+                c.fillRect(0, 0, W, H);
+                for (let i = 0; i < W; i += 10)
+                    for (let j = 0; j < H; j += 10)
+                        if ((i + j) % 20 === 0) { c.fillStyle = 'rgba(244,63,133,0.08)';
+                            c.fillRect(i, j, 10, 10); }
+                c.fillStyle = 'rgba(255,200,230,0.75)';
+                c.font = `bold ${Math.floor(W/6.5)}px Tajawal,sans-serif`;
+                c.textAlign = 'center';
+                c.textBaseline = 'middle';
+                c.fillText(currentLang === 'en' ? 'Scratch' : 'احكِ هنا', W / 2, H / 2);
+                c.globalCompositeOperation = 'destination-out';
+                let drawing = false;
+                const pos = e => { const r = cv.getBoundingClientRect(); const s = e.touches ? e.touches[0] : e; return { x: (
+                            s.clientX - r.left) * (W / r.width), y: (s.clientY - r.top) * (H / r.height) }; };
+                const scratch = e => {
+                    if (!drawing) return;
+                    e.preventDefault();
+                    const p2 = pos(e);
+                    c.beginPath();
+                    c.arc(p2.x, p2.y, W * 0.16, 0, Math.PI * 2);
+                    c.fill();
+                    if (!scratchThrottle) { playScratch();
+                        scratchThrottle = true;
+                        setTimeout(() => scratchThrottle = false, 80); }
+                };
+                cv.addEventListener('mousedown', e => { drawing = true;
+                    scratch(e); });
+                cv.addEventListener('mousemove', scratch);
+                cv.addEventListener('mouseup', () => drawing = false);
+                cv.addEventListener('mouseleave', () => drawing = false);
+                cv.addEventListener('touchstart', e => { drawing = true;
+                    scratch(e); }, { passive: false });
+                cv.addEventListener('touchmove', scratch, { passive: false });
+                cv.addEventListener('touchend', () => drawing = false);
+            }
+            document.getElementById('resetScratchBtn').addEventListener('click', () => { playBtn();
+                buildScratch(); });
+            document.getElementById('revealAllBtn').addEventListener('click', () => { window.revealAll(); });
+
+            // ═══════════════════════════════════
+            //  WHEEL
+            // ═══════════════════════════════════
+            let wAngle = 0,
+                wSpinning = false,
+                wHistory = [];
+
+            function getWheelData() { return getWheelItems(); }
+
+            function drawWheel(angle) {
+                const cv = $('wheelCanvas');
+                if (!cv) return;
+                const c = cv.getContext('2d'),
+                    cx = 160,
+                    cy = 160,
+                    r = 148,
+                    items = getWheelData(),
+                    n = items.length;
+                c.clearRect(0, 0, 320, 320);
+                c.beginPath();
+                c.arc(cx, cy, r + 4, 0, Math.PI * 2);
+                c.strokeStyle = 'rgba(244,63,133,0.25)';
+                c.lineWidth = 8;
+                c.stroke();
+                for (let i = 0; i < n; i++) {
+                    const a0 = angle + (i / n) * Math.PI * 2 - Math.PI / 2;
+                    const a1 = angle + ((i + 1) / n) * Math.PI * 2 - Math.PI / 2;
+                    c.beginPath();
+                    c.moveTo(cx, cy);
+                    c.arc(cx, cy, r, a0, a1);
+                    c.closePath();
+                    c.fillStyle = items[i].color;
+                    c.fill();
+                    c.strokeStyle = 'rgba(7,7,15,0.4)';
+                    c.lineWidth = 1.5;
+                    c.stroke();
+                    const mid = (a0 + a1) / 2;
+                    c.save();
+                    c.translate(cx + Math.cos(mid) * r * 0.62, cy + Math.sin(mid) * r * 0.62);
+                    c.rotate(mid + Math.PI / 2);
+                    c.fillStyle = 'rgba(255,255,255,0.95)';
+                    c.font = `bold 9px Tajawal,Inter,sans-serif`;
+                    c.textAlign = 'center';
+                    c.textBaseline = 'middle';
+                    c.fillText(items[i].text.substring(0, 12), 0, 0);
+                    c.restore();
+                }
+                c.beginPath();
+                c.arc(cx, cy, 24, 0, Math.PI * 2);
+                c.fillStyle = '#07070F';
+                c.fill();
+                c.strokeStyle = '#F43F85';
+                c.lineWidth = 2.5;
+                c.stroke();
+                c.beginPath();
+                c.moveTo(cx, 2);
+                c.lineTo(cx - 14, 28);
+                c.lineTo(cx + 14, 28);
+                c.closePath();
+                c.fillStyle = '#FF6FA3';
+                c.fill();
+            }
+
+            function getWheelIdx(angle) {
+                const n = getWheelData().length;
+                const pos = ((-angle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+                return Math.floor(pos / (Math.PI * 2 / n)) % n;
+            }
+            $('spinBtn').addEventListener('click', () => {
+                if (wSpinning) return;
+                wSpinning = true;
+                playSpin();
+                $('spinBtn').disabled = true;
+                const wr = $('wheelResult');
+                wr.textContent = '...';
+                wr.setAttribute('data-default', 'false');
+                $('wheelCanvas').classList.add('spinning');
+                const extra = Math.PI * 2 * (8 + Math.random() * 10);
+                const start = performance.now(),
+                    startA = wAngle,
+                    dur = 4200;
+                const items = getWheelData(),
+                    n = items.length,
+                    tick = Math.PI * 2 / n;
+                let lastSec = -1;
+
+                function anim(now) {
+                    const t = Math.min((now - start) / dur, 1);
+                    const ease = 1 - Math.pow(1 - t, 4);
+                    wAngle = startA + extra * ease;
+                    drawWheel(wAngle);
+                    if (soundOn) {
+                        const norm = ((wAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+                        const sec = Math.floor(norm / tick) % n;
+                        if (sec !== lastSec) {
+                            lastSec = sec;
+                            try {
+                                const cc = getCtx();
+                                if (cc) { const o = cc.createOscillator(),
+                                        g = cc.createGain();
+                                    o.type = 'triangle';
+                                    const sp = Math.max(0, Math.min(1, t < 0.25 ? t / 0.25 : 1 - (t - 0.25) /
+                                        0.75));
+                                    o.frequency.value = 280 + sp * 550;
+                                    g.gain.setValueAtTime(0, cc.currentTime);
+                                    g.gain.linearRampToValueAtTime(0.1 + sp * 0.08, cc.currentTime + 0.004);
+                                    g.gain.exponentialRampToValueAtTime(0.001, cc.currentTime + 0.05 + sp * 0.04);
+                                    o.connect(g);
+                                    g.connect(cc.destination);
+                                    o.start();
+                                    o.stop(cc.currentTime + 0.09); }
+                            } catch (e) {}
+                        }
+                    }
+                    if (t < 1) { requestAnimationFrame(anim); } else {
+                        wSpinning = false;
+                        $('spinBtn').disabled = false;
+                        $('wheelCanvas').classList.remove('spinning');
+                        const idx = getWheelIdx(wAngle);
+                        const result = items[idx].text;
+                        $('wheelResult').textContent = '🌐 ' + result;
+                        $('wheelResult').setAttribute('data-default', 'false');
+                        playWin();
+                        wHistory.unshift(result);
+                        if (wHistory.length > 10) wHistory.pop();
+                        updateWheelHistory();
+                        sendOnline('wheel', { result });
+                        toast('🎡 ' + result.substring(0, 25));
+                    }
+                }
+                requestAnimationFrame(anim);
+            });
+
+            function updateWheelHistory() {
+                const el = $('wheelHistory');
+                if (!el) return;
+                if (!wHistory.length) { el.innerHTML =
+                        `<div style="color:var(--text2);font-size:13px;padding:8px">${t('wheelHistoryEmpty')}</div>`; return; }
+                el.innerHTML = wHistory.map((r, i) =>
+                    `<div class="history-item"><div class="history-num">${i+1}</div><span style="font-size:12px">${r}</span></div>`
+                    ).join('');
+            }
+
+            // ═══════════════════════════════════
+            //  DICE
+            // ═══════════════════════════════════
+            function drawDie(cv, val, col = '#F43F85') {
+                if (!cv) return;
+                const W = cv.width,
+                    H = cv.height,
+                    c = cv.getContext('2d');
+                c.clearRect(0, 0, W, H);
+                const g = c.createLinearGradient(0, 0, W, H);
+                g.addColorStop(0, '#2A1535');
+                g.addColorStop(1, '#1A0E22');
+                c.fillStyle = g;
+                c.beginPath();
+                c.roundRect(2, 2, W - 4, H - 4, 16);
+                c.fill();
+                c.strokeStyle = col;
+                c.lineWidth = 2.5;
+                c.beginPath();
+                c.roundRect(2, 2, W - 4, H - 4, 16);
+                c.stroke();
+                const dots = { 1: [
+                        [.5, .5]
+                    ], 2: [
+                        [.28, .28],
+                        [.72, .72]
+                    ], 3: [
+                        [.28, .28],
+                        [.5, .5],
+                        [.72, .72]
+                    ], 4: [
+                        [.28, .28],
+                        [.72, .28],
+                        [.28, .72],
+                        [.72, .72]
+                    ], 5: [
+                        [.28, .28],
+                        [.72, .28],
+                        [.5, .5],
+                        [.28, .72],
+                        [.72, .72]
+                    ], 6: [
+                        [.28, .22],
+                        [.72, .22],
+                        [.28, .5],
+                        [.72, .5],
+                        [.28, .78],
+                        [.72, .78]
+                    ] } [val] || [
+                    [.5, .5]
+                ];
+                const rd = W * 0.09;
+                dots.forEach(([fx, fy]) => { c.shadowColor = col;
+                    c.shadowBlur = 8;
+                    c.beginPath();
+                    c.arc(fx * W, fy * H, rd, 0, Math.PI * 2);
+                    c.fillStyle = col;
+                    c.fill();
+                    c.shadowBlur = 0; });
+            }
+
+            function drawDieBlank(cv, col = '#F43F85') {
+                if (!cv) return;
+                const W = cv.width,
+                    H = cv.height,
+                    c = cv.getContext('2d');
+                c.clearRect(0, 0, W, H);
+                const g = c.createLinearGradient(0, 0, W, H);
+                g.addColorStop(0, '#2A1535');
+                g.addColorStop(1, '#1A0E22');
+                c.fillStyle = g;
+                c.beginPath();
+                c.roundRect(2, 2, W - 4, H - 4, 16);
+                c.fill();
+                c.strokeStyle = col;
+                c.lineWidth = 2.5;
+                c.beginPath();
+                c.roundRect(2, 2, W - 4, H - 4, 16);
+                c.stroke();
+                c.fillStyle = 'rgba(180,130,160,0.5)';
+                c.font = `bold ${Math.floor(W*.38)}px Tajawal`;
+                c.textAlign = 'center';
+                c.textBaseline = 'middle';
+                c.fillText('?', W / 2, H / 2);
+            }
+            let d1v = 1,
+                d2v = 1;
+
+            function rollDice() {
+                const d1 = $('die1'),
+                    d2 = $('die2');
+                if (!d1 || d1.classList.contains('rolling')) return;
+                playDice();
+                d1.classList.add('rolling');
+                d2.classList.add('rolling');
+                let cnt = 0;
+                const f = setInterval(() => { drawDie(d1, rand(1, 6));
+                    drawDie(d2, rand(1, 6)); if (++cnt > 10) clearInterval(f); }, 50);
+                setTimeout(() => {
+                    d1.classList.remove('rolling');
+                    d2.classList.remove('rolling');
+                    d1v = rand(1, 6);
+                    d2v = rand(1, 6);
+                    drawDie(d1, d1v);
+                    drawDie(d2, d2v);
+                    const tasks = getDiceTasks();
+                    const task = tasks[Math.floor(Math.random() * tasks.length)];
+                    $('diceResult').textContent = task.text;
+                    $('diceResult').setAttribute('data-default', 'false');
+                    $('diceCategoryArea').innerHTML =
+                        `<div class="dice-category-tag">${task.cat}</div>`;
+                    playWin();
+                    sendOnline('dice', { task: task.text, d1: d1v, d2: d2v, cat: task.cat });
+                }, 520);
+            }
+            $('rollBtn').addEventListener('click', () => rollDice());
+            $('die1').addEventListener('click', () => rollDice());
+            $('die2').addEventListener('click', () => rollDice());
+
+            // ═══════════════════════════════════
+            //  TRUTH OR DARE
+            // ═══════════════════════════════════
+            let todDiceNum = null,
+                todMode = null,
+                todStats = { total: 0, truths: 0, dares: 0 };
+            let usedQ = {};
+
+            function pickQ(pool) {
+                const k = pool;
+                if (!usedQ[k]) usedQ[k] = [];
+                const truthsData = getTruths();
+                const daresData = getDares();
+                const list = pool.startsWith('truth_') ? truthsData[pool.split('_')[1]] : daresData[pool.split('_')[1]];
+                if (!list) return '';
+                let avail = list.map((_, i) => i).filter(i => !usedQ[k].includes(i));
+                if (!avail.length) { usedQ[k] = [];
+                    avail = list.map((_, i) => i); }
+                const idx = avail[Math.floor(Math.random() * avail.length)];
+                usedQ[k].push(idx);
+                if (usedQ[k].length > list.length * 0.7) usedQ[k].shift();
+                return list[idx];
+            }
+
+            function rollTodDie() {
+                const die = $('todDie');
+                if (!die || die.classList.contains('rolling')) return;
+                playDice();
+                die.classList.add('rolling');
+                let cnt = 0;
+                const f = setInterval(() => { drawDie(die, rand(1, 6), '#FF6FA3'); if (++cnt > 10) clearInterval(
+                    f); }, 50);
+                setTimeout(() => {
+                    die.classList.remove('rolling');
+                    todDiceNum = rand(1, 6);
+                    drawDie(die, todDiceNum, '#FF6FA3');
+                    const INT = getIntensityInfo();
+                    const info = INT[todDiceNum];
+                    $('intTitle').textContent = info.title;
+                    $('intTitle').style.color = info.color;
+                    $('intDesc').textContent = info.desc;
+                    if (todMode) showQ(todMode);
+                }, 520);
+            }
+
+            function showQ(type) {
+                todMode = type;
+                const dnum = todDiceNum || rand(1, 6);
+                if (!todDiceNum) { todDiceNum = dnum;
+                    drawDie($('todDie'), dnum, '#FF6FA3');
+                    const INT = getIntensityInfo();
+                    const info = INT[dnum];
+                    $('intTitle').textContent = info.title;
+                    $('intTitle').style.color = info.color;
+                    $('intDesc').textContent = info.desc; }
+                const INT = getIntensityInfo();
+                const info = INT[dnum];
+                const pool = (type === 'truth' ? 'truth' : 'dare') + '_' + info.level;
+                const q = pickQ(pool);
+                todStats.total++;
+                if (type === 'truth') todStats.truths++;
+                else todStats.dares++;
+                $('statTotal').textContent = todStats.total;
+                $('statTruths').textContent = todStats.truths;
+                $('statDares').textContent = todStats.dares;
+                const box = $('todQCard');
+                box.innerHTML = `
+            <div class="tod-q-badge" style="background:${info.color}18;color:${info.color};border:1px solid ${info.color}33">
+              ${type==='truth'?'💬 '+(currentLang==='en'?'Truth':'صراحة'):'🔥 '+(currentLang==='en'?'Dare':'جرأة')} — ${info.title}
+            </div>
+            <div class="tod-q-text">${escHtml(q)}</div>`;
+                box.style.boxShadow = `0 0 30px ${info.color}25`;
+                box.setAttribute('data-default', 'false');
+                $('nextBtnArea').style.display = 'block';
+                $('nextTodBtn').onclick = () => { playBtn();
+                    showQ(todMode); };
+                playBtn();
+                sendOnline('question', { type, diceNum: dnum, question: q });
+            }
+
+            function escHtml(t) { const d = document.createElement('div');
+                d.appendChild(document.createTextNode(t)); return d.innerHTML; }
+            $('todDie').addEventListener('click', () => rollTodDie());
+            $('truthBtn').addEventListener('click', () => { playBtn();
+                showQ('truth'); });
+            $('dareBtn').addEventListener('click', () => { playBtn();
+                showQ('dare'); });
+
+            // ═══════════════════════════════════
+            //  ONLINE (PeerJS)
+            // ═══════════════════════════════════
+            const PEER_CONFIG = {
+                debug: 0,
+                host: '0.peerjs.com',
+                port: 443,
+                secure: true,
+                path: '/',
+                config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' },
+                        { urls: 'stun:stun2.l.google.com:19302' }, { urls: 'turn:openrelay.metered.ca:80',
+                            username: 'openrelayproject', credential: 'openrelayproject' }, { urls: 'turn:openrelay.metered.ca:443',
+                            username: 'openrelayproject', credential: 'openrelayproject' }
+                    ], iceCandidatePoolSize: 4, iceTransportPolicy: 'all', bundlePolicy: 'max-bundle',
+                    rtcpMuxPolicy: 'require' }
+            };
+            let peer = null,
+                conn = null,
+                connected = false,
+                myRoomId = '',
+                reconnTries = 0;
+
+            function genRoomId() { const c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let r = ''; for (let i = 0; i < 6; i++) r +=
+                    c[rand(0, c.length - 1)]; return r; }
+
+            function setStatus(st, txt) { const d = $('oDot'),
+                    s = $('oStatus'); if (!d || !s) return;
+                d.className = 'status-dot ' + st;
+                s.textContent = txt; }
+
+            function cleanPeer() { if (conn) { try { conn.close(); } catch (e) {} conn = null; } if (peer) { try { peer
+                        .destroy(); } catch (e) {} peer = null; } connected = false;
+                reconnTries = 0; }
+
+            function createRoom() {
+                cleanPeer();
+                myRoomId = genRoomId();
+                setStatus('connecting', 'جارٍ إنشاء الغرفة...');
+                try {
+                    peer = new Peer('habibi-' + myRoomId.toLowerCase(), PEER_CONFIG);
+                    peer.on('open', () => {
+                        $('roomId').textContent = myRoomId;
+                        $('roomBox').classList.add('show');
+                        setStatus('waiting', '⏳ في انتظار الشريك...');
+                        toast(t('toastRoomReady') + myRoomId);
+                        $('joinForm').classList.remove('show');
+                    });
+                    peer.on('connection', c => { conn = c;
+                        setupConn(); });
+                    peer.on('error', e => { setStatus('error', '❌ خطأ: ' + (e.type || ''));
+                        toast('❌ فشل الإنشاء');
+                        $('roomBox').classList.remove('show'); });
+                    peer.on('disconnected', () => { if (reconnTries < 3) { reconnTries++; if (peer && !peer.destroyed) peer
+                                .reconnect(); } else { setStatus('error', '❌ انقطع عن السيرفر'); } });
+                } catch (e) { setStatus('error', '❌ خطأ في الاتصال');
+                    toast('❌ تأكد من اتصالك'); }
+            }
+
+            function joinRoom(id) {
+                const rid = id.toUpperCase().trim();
+                if (!rid || rid.length < 4) { toast('❌ أدخل رمزاً صحيحاً'); return; }
+                cleanPeer();
+                setStatus('connecting', '🔄 جارٍ الاتصال...');
+                try {
+                    peer = new Peer(null, PEER_CONFIG);
+                    peer.on('open', () => { conn = peer.connect('habibi-' + rid.toLowerCase(), { reliable: true });
+                        setupConn(); });
+                    peer.on('error', () => { setStatus('error', '❌ الغرفة غير موجودة');
+                        toast('❌ تحقق من الرمز');
+                        $('joinForm').classList.add('show'); });
+                } catch (e) { setStatus('error', '❌ خطأ');
+                    toast('❌ تأكد من اتصالك'); }
+            }
+
+            function setupConn() {
+                if (!conn) return;
+                conn.on('open', () => {
+                    connected = true;
+                    reconnTries = 0;
+                    setStatus('connected', '🟢 متصل بشريكك ✓');
+                    $('partnerBox').classList.add('show');
+                    $('roomBox').classList.remove('show');
+                    $('joinForm').classList.remove('show');
+                    $('chatWrap').classList.add('show');
+                    $('floatChat').classList.add('show');
+                    $('headerBadge').classList.add('show');
+                    playConnect();
+                    toast(t('toastConnected'), 3500);
+                });
+                conn.on('data', d => handleOnline(d));
+                conn.on('close', () => {
+                    connected = false;
+                    setStatus('disconnected', '⚠️ انقطع الاتصال');
+                    $('partnerBox').classList.remove('show');
+                    $('headerBadge').classList.remove('show');
+                    $('floatChat').classList.remove('show');
+                    toast(t('toastDisconnected'), 4000);
+                });
+                conn.on('error', () => { setStatus('error', '⚠️ خطأ في القناة'); });
+            }
+
+            function sendOnline(type, payload) { if (!connected || !conn || !conn.open) return; try { conn.send({ type,
+                    payload, ts: Date.now() }); } catch (e) {} }
+
+            function handleOnline(data) {
+                if (!data || !data.type) return;
+                const { type, payload } = data;
+                const INT = getIntensityInfo();
+                switch (type) {
+                    case 'wheel':
+                        $('wheelResult').textContent = '🌐 ' + payload.result;
+                        $('wheelResult').setAttribute('data-default', 'false');
+                        playWin();
+                        toast('🎡 ' + payload.result.substring(0, 20));
+                        break;
+                    case 'dice':
+                        $('diceResult').textContent = payload.task;
+                        $('diceResult').setAttribute('data-default', 'false');
+                        if ($('diceCategoryArea')) $('diceCategoryArea').innerHTML =
+                            `<div class="dice-category-tag">🌐 ${payload.cat}</div>`;
+                        drawDie($('die1'), payload.d1);
+                        drawDie($('die2'), payload.d2);
+                        playWin();
+                        toast('🎲 ' + (currentLang === 'en' ? 'Partner rolled!' : 'شريكك رمى النرد'));
+                        break;
+                    case 'question': { const info = INT[payload.diceNum] || INT[1]; const box = $('todQCard');
+                        box.innerHTML =
+                            `<div class="tod-q-badge" style="background:${info.color}18;color:${info.color}">🌐 ${payload.type==='truth'?'💬':'🔥'} — ${info.title}</div><div class="tod-q-text">${escHtml(payload.question)}</div>`;
+                        box.setAttribute('data-default', 'false');
+                        $('nextBtnArea').style.display = 'block';
+                        playBtn();
+                        toast('🔥 ' + (currentLang === 'en' ? 'New question!' : 'شريكك اختار سؤالاً'));
+                        break; }
+                    case 'chat':
+                        addMsg(payload.text, 'partner');
+                        const active = document.querySelector('.section.active');
+                        if (!active || active.id !== 'sec-online') { $('notifDot').classList.add('show');
+                            toast('💬 ' + payload.text.substring(0, 30)); }
+                        break;
+                }
+            }
+
+            function addMsg(text, who) {
+                const c = $('chatMsgs');
+                if (!c) return;
+                const e = $('chatEmpty');
+                if (e) e.remove();
+                const m = document.createElement('div');
+                m.className = 'chat-msg ' + who;
+                const b = document.createElement('span');
+                b.className = 'bubble';
+                b.textContent = text;
+                m.appendChild(b);
+                c.appendChild(m);
+                c.scrollTop = c.scrollHeight;
+            }
+
+            function sendChat() {
+                const inp = $('chatInput');
+                if (!inp) return;
+                const t = inp.value.trim();
+                if (!t) return;
+                if (!connected) { toast('⚠️ ' + (currentLang === 'en' ? 'Not connected' : 'غير متصل')); return; }
+                addMsg(t, 'me');
+                sendOnline('chat', { text: t });
+                inp.value = '';
+                playBtn();
+            }
+
+            function disconnectOnline() {
+                cleanPeer();
+                setStatus('idle', t('statusIdle'));
+                ['partnerBox', 'roomBox', 'chatWrap', 'floatChat', 'headerBadge'].forEach(id => { const el = $(id); if (el)
+                        el.classList.remove('show'); });
+                $('joinForm').classList.remove('show');
+                toast('🔌 ' + (currentLang === 'en' ? 'Disconnected' : 'تم قطع الاتصال'));
+            }
+            $('createBtn').addEventListener('click', () => { playBtn();
+                $('joinForm').classList.remove('show');
+                createRoom(); });
+            $('showJoinBtn').addEventListener('click', () => { playBtn();
+                $('roomBox').classList.remove('show');
+                $('joinForm').classList.toggle('show'); });
+            $('joinGoBtn').addEventListener('click', () => { playBtn();
+                joinRoom($('joinInput').value); });
+            $('joinInput').addEventListener('keydown', e => { if (e.key === 'Enter') { playBtn();
+                    joinRoom($('joinInput').value); } });
+            $('copyBtn').addEventListener('click', () => { playClick(); if (navigator.clipboard) { navigator.clipboard.writeText(
+                    myRoomId).then(() => toast(t('toastCopied') + myRoomId)).catch(() => toast(myRoomId)); } else { toast(
+                    myRoomId); } });
+            $('discoBtn').addEventListener('click', () => disconnectOnline());
+            $('chatSend').addEventListener('click', () => sendChat());
+            $('chatInput').addEventListener('keydown', e => { if (e.key === 'Enter') sendChat(); });
+            $('floatChat').addEventListener('click', () => { $('notifDot').classList.remove('show');
+                switchTab('online');
+                setTimeout(() => { const c = $('chatWrap'); if (c) c.scrollIntoView({ behavior: 'smooth' }); }, 200); });
+            $('headerBadge').addEventListener('click', () => switchTab('online'));
+
+            // ═══════════════════════════════════
+            //  INITIALIZATION
+            // ═══════════════════════════════════
+            function init() {
+                buildHomeGamesGrid();
+                buildOnlineFeatures();
+                buildScratch();
+                drawWheel(0);
+                drawDieBlank($('die1'));
+                drawDieBlank($('die2'));
+                drawDieBlank($('todDie'), '#FF6FA3');
+                updateWheelHistory();
+                updateMonetagI18n();
+                const detail = document.getElementById('scratchDetail');
+                if (detail) { detail.innerHTML = t('scratchDefault');
+                    detail.setAttribute('data-default', 'true'); }
+                const wheelResult = document.getElementById('wheelResult');
+                if (wheelResult) { wheelResult.textContent = t('wheelDefault');
+                    wheelResult.setAttribute('data-default', 'true'); }
+                const diceResult = document.getElementById('diceResult');
+                if (diceResult) { diceResult.textContent = t('diceDefault');
+                    diceResult.setAttribute('data-default', 'true'); }
+                const todCard = document.getElementById('todQCard');
+                if (todCard) todCard.setAttribute('data-default', 'true');
+                document.getElementById('langToggle').textContent = 'EN';
+            }
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+            else init();
+            window.addEventListener('beforeunload', cleanPeer);
+            window.addEventListener('pagehide', cleanPeer);
+        })();
+    </script>
+</body>
+</html>
